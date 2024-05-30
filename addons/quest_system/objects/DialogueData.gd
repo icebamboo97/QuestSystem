@@ -1,5 +1,5 @@
 ## Data for processing dialogue through a [param DialogueParser].
-@icon('res://addons/quest_system/icons/Dialogue.svg')
+@icon('res://addons/quest_system/icons/Quest.svg')
 class_name DialogueData
 extends Resource
 

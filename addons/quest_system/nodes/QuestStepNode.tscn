@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://b60fa8vcjuoo6"]
 
-[ext_resource type="Script" path="res://addons/quest_system/nodes/QuestStepNode.gd" id="1_govbl"]
-[ext_resource type="Texture2D" uid="uid://dla76qr5vqp1r" path="res://addons/quest_system/icons/Character.svg" id="2_nbcvr"]
-[ext_resource type="Texture2D" uid="uid://dps8mwnnuc5nm" path="res://addons/quest_system/icons/DistractionFree.svg" id="3_1mb3w"]
-[ext_resource type="PackedScene" uid="uid://blp6ulybtwgcj" path="res://addons/quest_system/nodes/DialogueNodeOption.tscn" id="4_6p0v7"]
+[ext_resource type="Script" path="res://addons/quest_system/nodes/questStepNode.gd" id="1_g5fll"]
+[ext_resource type="Texture2D" uid="uid://dla76qr5vqp1r" path="res://addons/quest_system/icons/Character.svg" id="2_i4hav"]
+[ext_resource type="Texture2D" uid="uid://dps8mwnnuc5nm" path="res://addons/quest_system/icons/DistractionFree.svg" id="3_42j5y"]
+[ext_resource type="PackedScene" uid="uid://blp6ulybtwgcj" path="res://addons/quest_system/nodes/DialogueNodeOption.tscn" id="4_rshl2"]
 
 [sub_resource type="CodeHighlighter" id="CodeHighlighter_btpy8"]
 number_color = Color(1, 1, 1, 1)
@@ -64,49 +64,49 @@ slot/4/right_type = 0
 slot/4/right_color = Color(1, 1, 1, 1)
 slot/4/right_icon = null
 slot/4/draw_stylebox = true
-script = ExtResource("1_govbl")
-resize_timer = NodePath("DialogueContainer/ResizeTimer")
-custom_speaker_timer = NodePath("SpeakerContainer/CustomSpeakerTimer")
-dialogue_timer = NodePath("DialogueContainer/DialogueTimer")
+script = ExtResource("1_g5fll")
+resize_timer = NodePath("DescriptionContainer/ResizeTimer")
+custom_speaker_timer = NodePath("TitleContainer/CustomSpeakerTimer")
+dialogue_timer = NodePath("DescriptionContainer/DialogueTimer")
 
-[node name="SpeakerLabel" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="."]
 layout_mode = 2
-text = "Speaker"
+text = "Title"
 
-[node name="SpeakerContainer" type="HBoxContainer" parent="."]
+[node name="TitleContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="CustomSpeaker" type="LineEdit" parent="SpeakerContainer"]
+[node name="CustomSpeaker" type="LineEdit" parent="TitleContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Speaker" type="OptionButton" parent="SpeakerContainer"]
+[node name="Speaker" type="OptionButton" parent="TitleContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
 
-[node name="CharacterToggle" type="Button" parent="SpeakerContainer"]
+[node name="CharacterToggle" type="Button" parent="TitleContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
-icon = ExtResource("2_nbcvr")
+icon = ExtResource("2_i4hav")
 
-[node name="CustomSpeakerTimer" type="Timer" parent="SpeakerContainer"]
+[node name="CustomSpeakerTimer" type="Timer" parent="TitleContainer"]
 wait_time = 0.5
 one_shot = true
 
 [node name="DescriptionLabel" type="Label" parent="."]
 layout_mode = 2
-text = "Step Description"
+text = "Description"
 
-[node name="DialogueContainer" type="HBoxContainer" parent="."]
+[node name="DescriptionContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Dialogue" type="TextEdit" parent="DialogueContainer"]
+[node name="Dialogue" type="TextEdit" parent="DescriptionContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -115,28 +115,27 @@ wrap_mode = 1
 syntax_highlighter = SubResource("CodeHighlighter_btpy8")
 highlight_all_occurrences = true
 
-[node name="ExpandButton" type="Button" parent="DialogueContainer"]
+[node name="ExpandButton" type="Button" parent="DescriptionContainer"]
 layout_mode = 2
-icon = ExtResource("3_1mb3w")
+icon = ExtResource("3_42j5y")
 
-[node name="DialoguePanel" type="PopupPanel" parent="DialogueContainer"]
+[node name="DialoguePanel" type="PopupPanel" parent="DescriptionContainer"]
 unique_name_in_owner = true
 initial_position = 1
 size = Vector2i(800, 600)
-visible = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DialogueContainer/DialoguePanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionContainer/DialoguePanel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 796.0
-offset_bottom = 596.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DialogueExpanded" type="TextEdit" parent="DialogueContainer/DialoguePanel/VBoxContainer"]
+[node name="DialogueExpanded" type="TextEdit" parent="DescriptionContainer/DialoguePanel/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 91)
 layout_mode = 2
@@ -146,32 +145,32 @@ wrap_mode = 1
 syntax_highlighter = SubResource("CodeHighlighter_btpy8")
 highlight_all_occurrences = true
 
-[node name="CenterContainer" type="CenterContainer" parent="DialogueContainer/DialoguePanel/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="DescriptionContainer/DialoguePanel/VBoxContainer"]
 layout_mode = 2
 
-[node name="CloseButton" type="Button" parent="DialogueContainer/DialoguePanel/VBoxContainer/CenterContainer"]
+[node name="CloseButton" type="Button" parent="DescriptionContainer/DialoguePanel/VBoxContainer/CenterContainer"]
 layout_mode = 2
 text = "Close"
 
-[node name="ResizeTimer" type="Timer" parent="DialogueContainer"]
+[node name="ResizeTimer" type="Timer" parent="DescriptionContainer"]
 wait_time = 0.5
 one_shot = true
 
-[node name="DialogueTimer" type="Timer" parent="DialogueContainer"]
+[node name="DialogueTimer" type="Timer" parent="DescriptionContainer"]
 wait_time = 0.5
 one_shot = true
 
-[node name="Option1" parent="." instance=ExtResource("4_6p0v7")]
+[node name="Option1" parent="." instance=ExtResource("4_rshl2")]
 layout_mode = 2
 
 [connection signal="resize_request" from="." to="." method="_on_resize"]
-[connection signal="text_changed" from="SpeakerContainer/CustomSpeaker" to="." method="_on_custom_speaker_changed"]
-[connection signal="item_selected" from="SpeakerContainer/Speaker" to="." method="_on_speaker_selected"]
-[connection signal="toggled" from="SpeakerContainer/CharacterToggle" to="." method="_on_speaker_toggled"]
-[connection signal="timeout" from="SpeakerContainer/CustomSpeakerTimer" to="." method="_on_custom_speaker_timer_timeout"]
-[connection signal="text_changed" from="DialogueContainer/Dialogue" to="." method="_on_dialogue_text_changed"]
-[connection signal="pressed" from="DialogueContainer/ExpandButton" to="." method="_on_expand_button_pressed"]
-[connection signal="text_changed" from="DialogueContainer/DialoguePanel/VBoxContainer/DialogueExpanded" to="." method="_on_dialogue_text_changed"]
-[connection signal="pressed" from="DialogueContainer/DialoguePanel/VBoxContainer/CenterContainer/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="timeout" from="DialogueContainer/ResizeTimer" to="." method="_on_resize_timer_timeout"]
-[connection signal="timeout" from="DialogueContainer/DialogueTimer" to="." method="_on_dialogue_timer_timeout"]
+[connection signal="text_changed" from="TitleContainer/CustomSpeaker" to="." method="_on_custom_speaker_changed"]
+[connection signal="item_selected" from="TitleContainer/Speaker" to="." method="_on_speaker_selected"]
+[connection signal="toggled" from="TitleContainer/CharacterToggle" to="." method="_on_speaker_toggled"]
+[connection signal="timeout" from="TitleContainer/CustomSpeakerTimer" to="." method="_on_custom_speaker_timer_timeout"]
+[connection signal="text_changed" from="DescriptionContainer/Dialogue" to="." method="_on_dialogue_text_changed"]
+[connection signal="pressed" from="DescriptionContainer/ExpandButton" to="." method="_on_expand_button_pressed"]
+[connection signal="text_changed" from="DescriptionContainer/DialoguePanel/VBoxContainer/DialogueExpanded" to="." method="_on_dialogue_text_changed"]
+[connection signal="pressed" from="DescriptionContainer/DialoguePanel/VBoxContainer/CenterContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="timeout" from="DescriptionContainer/ResizeTimer" to="." method="_on_resize_timer_timeout"]
+[connection signal="timeout" from="DescriptionContainer/DialogueTimer" to="." method="_on_dialogue_timer_timeout"]

@@ -156,7 +156,7 @@ filters = PackedStringArray("*.tres; Dialogue File")
 [node name="OpenDialog" type="FileDialog" parent="Main/Workspace/SidePanel/Files"]
 title = "Open a file"
 size = Vector2i(600, 400)
-ok_button_text = "打开"
+ok_button_text = "Open"
 mode_overrides_title = false
 file_mode = 0
 filters = PackedStringArray("*.tres; Dialogue File")
@@ -177,6 +177,20 @@ dialog_autowrap = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="QuestNameLabel" type="Label" parent="Main/Workspace/SidePanel/Data"]
+layout_mode = 2
+text = "QuestName"
+
+[node name="QuestNameLineEdit" type="LineEdit" parent="Main/Workspace/SidePanel/Data"]
+layout_mode = 2
+
+[node name="QuestTypeLabel" type="Label" parent="Main/Workspace/SidePanel/Data"]
+layout_mode = 2
+text = "QuestType"
+
+[node name="QuestTypeOptionButton" type="OptionButton" parent="Main/Workspace/SidePanel/Data"]
+layout_mode = 2
 
 [node name="Characters" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data"]
 layout_mode = 2
@@ -209,7 +223,7 @@ icon = ExtResource("5_41leg")
 title = "Open a File"
 initial_position = 1
 size = Vector2i(600, 400)
-ok_button_text = "打开"
+ok_button_text = "Open"
 file_mode = 0
 filters = PackedStringArray("*.tres; Character resource")
 

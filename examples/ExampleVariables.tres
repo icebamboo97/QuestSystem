@@ -54,7 +54,7 @@ Like: You have {{COINS}} coins!",
 "dialogue": "Setting COINS to 5.
 Current value: {{COINS}}
 ",
-"offset": Vector2(1040, 0),
+"offset": Vector2(1060, -20),
 "options": {
 0: {
 "condition": {},
@@ -155,7 +155,7 @@ Current value: {{COINS}}
 },
 "4_1": {
 "link": &"1_4",
-"offset": Vector2(1360, 140),
+"offset": Vector2(1380, 140),
 "type": 0,
 "value": "5",
 "variable": "COINS"

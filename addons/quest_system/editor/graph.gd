@@ -8,7 +8,7 @@ signal run_requested(start_node_idx : int)
 
 @export var NodeScenes: Array[PackedScene] = [
 	preload("res://addons/quest_system/nodes/StartNode.tscn"),
-	preload("res://addons/quest_system/nodes/DialogueNode.tscn"),
+	preload("res://addons/quest_system/nodes/QuestStepNode.tscn"),
 	preload("res://addons/quest_system/nodes/CommentNode.tscn"),
 	preload("res://addons/quest_system/nodes/SignalNode.tscn"),
 	preload("res://addons/quest_system/nodes/SetNode.tscn"),

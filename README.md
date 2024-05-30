@@ -1,5 +1,5 @@
 ![DialogueNodes icon](icon.svg)
-# Dialogue Nodes
+# Quest System
 ![DialogueNodes editor](.screenshots/DN0.png)
 <img src='.screenshots/DN1.png' width='51%'/>
 <img src='.screenshots/DN2.png' width='48%'/>

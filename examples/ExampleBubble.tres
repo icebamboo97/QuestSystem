@@ -24,7 +24,7 @@ nodes = {
 }
 },
 "size": Vector2(300.001, 240.001),
-"speaker": 0
+"speaker": -1
 },
 "1_10": {
 "dialogue": "[wait speed=5]Uhh...[/wait]",
@@ -37,7 +37,7 @@ nodes = {
 }
 },
 "size": Vector2(300.001, 240.001),
-"speaker": 0
+"speaker": -1
 },
 "1_11": {
 "dialogue": "What the f--",
@@ -50,7 +50,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240.001),
-"speaker": 0
+"speaker": -1
 },
 "1_12": {
 "dialogue": "...and it just went away like that.",
@@ -63,7 +63,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240),
-"speaker": 1
+"speaker": -1
 },
 "1_13": {
 "dialogue": "So weird...",
@@ -76,7 +76,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240),
-"speaker": 0
+"speaker": -1
 },
 "1_14": {
 "dialogue": "[wait speed=5]Wha...[/wait]",
@@ -89,7 +89,7 @@ nodes = {
 }
 },
 "size": Vector2(300.001, 240.001),
-"speaker": 0
+"speaker": -1
 },
 "1_15": {
 "dialogue": "Yeah, I mea--",
@@ -102,7 +102,7 @@ nodes = {
 }
 },
 "size": Vector2(300.001, 240.001),
-"speaker": 0
+"speaker": -1
 },
 "1_2": {
 "dialogue": "Hey Greg.",
@@ -115,7 +115,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240.001),
-"speaker": 1
+"speaker": -1
 },
 "1_3": {
 "dialogue": "What's up?",
@@ -128,7 +128,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240.001),
-"speaker": 1
+"speaker": -1
 },
 "1_4": {
 "dialogue": "What a peaceful day, right?",
@@ -141,7 +141,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240.001),
-"speaker": 0
+"speaker": -1
 },
 "1_5": {
 "dialogue": "I know, right?!",
@@ -154,7 +154,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240.001),
-"speaker": 1
+"speaker": -1
 },
 "1_6": {
 "dialogue": "I sure hope nothing weird happens...",
@@ -167,7 +167,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240.001),
-"speaker": 1
+"speaker": -1
 },
 "1_7": {
 "dialogue": "[shake]What is that?![/shake]",
@@ -180,7 +180,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240.001),
-"speaker": 1
+"speaker": -1
 },
 "1_8": {
 "dialogue": "[wave]waponka dooby lum lum![/wave]",
@@ -193,7 +193,7 @@ nodes = {
 }
 },
 "size": Vector2(300.001, 240.001),
-"speaker": 2
+"speaker": -1
 },
 "1_9": {
 "dialogue": "bunga cowa!",
@@ -206,7 +206,7 @@ nodes = {
 }
 },
 "size": Vector2(300.001, 240.001),
-"speaker": 2
+"speaker": -1
 },
 "3_1": {
 "link": &"1_15",
@@ -222,3 +222,4 @@ nodes = {
 variables = {}
 strays = Array[String]([])
 characters = "res://examples/Characters.tres"
+quest_name = ""

@@ -93,3 +93,4 @@ Usage: [lb]effect1] [lb]effect2] text goes here [lb]/effect2] [lb]s/effect1]",
 variables = {}
 strays = Array[String]([])
 characters = ""
+quest_name = ""

@@ -59,3 +59,4 @@ Additionally you can pass a value with the signal and use it in your code.",
 variables = {}
 strays = Array[String]([])
 characters = ""
+quest_name = ""

@@ -30,7 +30,7 @@ func _ready():
 	confirm_dialog.add_cancel_button('Cancel')
 	
 	data_container.get_node('Characters').modified.connect(_on_data_modified)
-
+	data_container.modified.connect(_on_data_modified)
 
 func create_entry(file_name : String, path : String, data : DialogueData):
 	var new_idx : int = item_count
@@ -49,7 +49,8 @@ func create_entry(file_name : String, path : String, data : DialogueData):
 			'characters': data.characters,
 			'variables': null,
 			'graph': null,
-			'modified': false
+			'modified': false,
+			'quest_name':data.quest_name,
 			}
 		
 		# create graph node for this file
@@ -135,9 +136,10 @@ func save_file(idx := cur_idx):
 	var data : DialogueData = metadata['graph'].get_data()
 	if idx == cur_idx:
 		data.characters = data_container.get_node('Characters').get_data()
-		data.quest_name = data_container.get_node('QuestName').get_data()
+		data.quest_name = data_container.get_name_data()
 	else:
 		data.characters = metadata['characters']
+		data.quest_name = metadata['quest_name']
 	data.variables = metadata['variables'].get_data()
 	
 	# save to file
@@ -161,6 +163,7 @@ func save_as(path : String):
 	var data : DialogueData = metadata['graph'].get_data()
 	data.characters = data_container.get_node('Characters').get_data()
 	data.variables = metadata['variables'].get_data()
+	data.quest_name = data_container.get_name_data()
 	
 	# create entry for file
 	create_entry(file_name, path, data)
@@ -250,12 +253,15 @@ func switch_file(idx : int, ensure_path := ''):
 		if data_container.has_node('Variables'):
 			data_container.remove_child(cur_metadata['variables'])
 		cur_metadata['characters'] = data_container.get_node('Characters').get_data()
+		cur_metadata['quest_name'] = data_container.get_name_data()
 		set_item_metadata(cur_idx, cur_metadata)
 	
 	# add new nodes
 	data_container.get_node('Characters').characters_updated.connect(new_metadata['graph']._on_characters_updated)
 	workspace.add_child(new_metadata['graph'])
 	data_container.get_node('Characters').load_data(new_metadata['characters'])
+	# 任务名加载
+	data_container.load_data(new_metadata['quest_name'])
 	editor.add_menu.get_popup().id_pressed.connect(new_metadata['graph']._on_add_menu_pressed)
 	data_container.add_child(new_metadata['variables'])
 	

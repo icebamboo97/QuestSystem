@@ -24,7 +24,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240),
-"speaker": 1
+"speaker": -1
 },
 "1_2": {
 "dialogue": "This is an example of setting up audio to play when a dialogue is playing.",
@@ -37,7 +37,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 240),
-"speaker": 1
+"speaker": -1
 },
 "1_3": {
 "dialogue": "[wait]Funny thing is, you don't have to do anything in the dialogue editor.[/wait][br]
@@ -51,7 +51,7 @@ nodes = {
 }
 },
 "size": Vector2(300, 241),
-"speaker": 1
+"speaker": -1
 },
 "1_4": {
 "dialogue": "[wait speed=4]Also...[/wait][wait time=2] you can mess around with the wait speed and time and the sound plays accordingly![/wait]",
@@ -64,10 +64,10 @@ nodes = {
 }
 },
 "size": Vector2(300, 241),
-"speaker": 1
+"speaker": -1
 }
 }
 variables = {}
 strays = Array[String]([])
-characters = "res://examples/Characters.tres"
+characters = ""
 quest_name = ""

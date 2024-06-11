@@ -16,3 +16,5 @@ extends Resource
 @export var strays : Array[String] = []
 ## Path to the [param CharacterList] resource file.
 @export var characters := ''
+## 任务名称
+@export var quest_name := ''

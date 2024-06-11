@@ -1,7 +1,6 @@
 @tool
 extends Control
 
-
 @onready var file_menu = $Main/ToolBar/FileMenu
 @onready var debug_menu = $Main/ToolBar/DebugMenu
 @onready var add_menu = $Main/ToolBar/AddMenu

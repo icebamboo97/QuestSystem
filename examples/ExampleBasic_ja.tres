@@ -35,3 +35,4 @@ nodes = {
 variables = {}
 strays = Array[String](["2_1"])
 characters = ""
+quest_name = ""

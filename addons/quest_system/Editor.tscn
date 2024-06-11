@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://bqscglixmr4bd"]
+[gd_scene load_steps=21 format=3 uid="uid://bqscglixmr4bd"]
 
 [ext_resource type="Script" path="res://addons/quest_system/editor/editor.gd" id="1_f16jc"]
 [ext_resource type="Script" path="res://addons/quest_system/editor/files.gd" id="2_darcx"]
 [ext_resource type="Script" path="res://addons/quest_system/editor/characters.gd" id="3_285lm"]
+[ext_resource type="Script" path="res://addons/quest_system/editor/details.gd" id="3_bihka"]
 [ext_resource type="Texture2D" uid="uid://cf5ef41yo6jl6" path="res://addons/quest_system/icons/Reload.svg" id="4_qunvm"]
 [ext_resource type="Texture2D" uid="uid://buayifvickq2l" path="res://addons/quest_system/icons/Folder.svg" id="5_41leg"]
 [ext_resource type="Texture2D" uid="uid://cc1ufhyvste6m" path="res://addons/quest_system/icons/Forward.svg" id="6_k8af1"]
@@ -134,7 +135,7 @@ allow_rmb_select = true
 script = ExtResource("2_darcx")
 editor = NodePath("../../../..")
 workspace = NodePath("../..")
-data_container = NodePath("../Data")
+data_container = NodePath("../Details")
 
 [node name="PopupMenu" type="PopupMenu" parent="Main/Workspace/SidePanel/Files"]
 item_count = 4
@@ -173,53 +174,53 @@ size = Vector2i(400, 109)
 dialog_text = "The file/s contains unsaved changes. Are you sure you want to close the file/s?"
 dialog_autowrap = true
 
-[node name="Data" type="VBoxContainer" parent="Main/Workspace/SidePanel"]
-visible = false
+[node name="Details" type="VBoxContainer" parent="Main/Workspace/SidePanel"]
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("3_bihka")
 
-[node name="QuestNameLabel" type="Label" parent="Main/Workspace/SidePanel/Data"]
+[node name="QuestNameTitle" type="Label" parent="Main/Workspace/SidePanel/Details"]
 layout_mode = 2
 text = "QuestName"
 
-[node name="QuestNameLineEdit" type="LineEdit" parent="Main/Workspace/SidePanel/Data"]
+[node name="QuestName" type="TextEdit" parent="Main/Workspace/SidePanel/Details"]
 layout_mode = 2
 
-[node name="QuestTypeLabel" type="Label" parent="Main/Workspace/SidePanel/Data"]
+[node name="QuestTypeTitle" type="Label" parent="Main/Workspace/SidePanel/Details"]
 layout_mode = 2
 text = "QuestType"
 
-[node name="QuestTypeOptionButton" type="OptionButton" parent="Main/Workspace/SidePanel/Data"]
+[node name="QuestTypeOptionButton" type="OptionButton" parent="Main/Workspace/SidePanel/Details"]
 layout_mode = 2
 
-[node name="Characters" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data"]
+[node name="Characters" type="VBoxContainer" parent="Main/Workspace/SidePanel/Details"]
 layout_mode = 2
 script = ExtResource("3_285lm")
 editor_path = NodePath("../../../../..")
 
-[node name="Title" type="Label" parent="Main/Workspace/SidePanel/Data/Characters"]
+[node name="Title" type="Label" parent="Main/Workspace/SidePanel/Details/Characters"]
 layout_mode = 2
 text = "Characters"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Main/Workspace/SidePanel/Data/Characters"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/Workspace/SidePanel/Details/Characters"]
 layout_mode = 2
 
-[node name="ResetButton" type="Button" parent="Main/Workspace/SidePanel/Data/Characters/HBoxContainer"]
+[node name="ResetButton" type="Button" parent="Main/Workspace/SidePanel/Details/Characters/HBoxContainer"]
 visible = false
 layout_mode = 2
 icon = ExtResource("4_qunvm")
 flat = true
 
-[node name="FilePath" type="TextEdit" parent="Main/Workspace/SidePanel/Data/Characters/HBoxContainer"]
+[node name="FilePath" type="TextEdit" parent="Main/Workspace/SidePanel/Details/Characters/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 scroll_fit_content_height = true
 
-[node name="LoadButton" type="Button" parent="Main/Workspace/SidePanel/Data/Characters/HBoxContainer"]
+[node name="LoadButton" type="Button" parent="Main/Workspace/SidePanel/Details/Characters/HBoxContainer"]
 layout_mode = 2
 icon = ExtResource("5_41leg")
 
-[node name="OpenDialog" type="FileDialog" parent="Main/Workspace/SidePanel/Data/Characters"]
+[node name="OpenDialog" type="FileDialog" parent="Main/Workspace/SidePanel/Details/Characters"]
 title = "Open a File"
 initial_position = 1
 size = Vector2i(600, 400)
@@ -287,10 +288,10 @@ custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_ogokn"), Sub
 [connection signal="file_selected" from="Main/Workspace/SidePanel/Files/SaveDialog" to="Main/Workspace/SidePanel/Files" method="save_as"]
 [connection signal="canceled" from="Main/Workspace/SidePanel/Files/ConfirmationDialog" to="Main/Workspace/SidePanel/Files" method="_on_confirm_dialog_canceled"]
 [connection signal="custom_action" from="Main/Workspace/SidePanel/Files/ConfirmationDialog" to="Main/Workspace/SidePanel/Files" method="_on_confirm_dialog_action"]
-[connection signal="pressed" from="Main/Workspace/SidePanel/Data/Characters/HBoxContainer/ResetButton" to="Main/Workspace/SidePanel/Data/Characters" method="_on_reset_button_pressed"]
-[connection signal="text_changed" from="Main/Workspace/SidePanel/Data/Characters/HBoxContainer/FilePath" to="Main/Workspace/SidePanel/Data/Characters" method="_on_file_path_text_changed"]
-[connection signal="pressed" from="Main/Workspace/SidePanel/Data/Characters/HBoxContainer/LoadButton" to="Main/Workspace/SidePanel/Data/Characters" method="_on_load_button_pressed"]
-[connection signal="file_selected" from="Main/Workspace/SidePanel/Data/Characters/OpenDialog" to="Main/Workspace/SidePanel/Data/Characters" method="_on_file_selected"]
+[connection signal="pressed" from="Main/Workspace/SidePanel/Details/Characters/HBoxContainer/ResetButton" to="Main/Workspace/SidePanel/Details/Characters" method="_on_reset_button_pressed"]
+[connection signal="text_changed" from="Main/Workspace/SidePanel/Details/Characters/HBoxContainer/FilePath" to="Main/Workspace/SidePanel/Details/Characters" method="_on_file_path_text_changed"]
+[connection signal="pressed" from="Main/Workspace/SidePanel/Details/Characters/HBoxContainer/LoadButton" to="Main/Workspace/SidePanel/Details/Characters" method="_on_load_button_pressed"]
+[connection signal="file_selected" from="Main/Workspace/SidePanel/Details/Characters/OpenDialog" to="Main/Workspace/SidePanel/Details/Characters" method="_on_file_selected"]
 [connection signal="pressed" from="Main/Statusbar/PanelToggle" to="." method="_on_files_toggle_button_pressed"]
 [connection signal="pressed" from="Main/Statusbar/VersionNumber" to="." method="_on_version_number_pressed"]
 [connection signal="gui_input" from="DialogueBackground" to="." method="_on_dialogue_background_input"]

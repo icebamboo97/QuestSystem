@@ -135,6 +135,7 @@ func save_file(idx := cur_idx):
 	var data : DialogueData = metadata['graph'].get_data()
 	if idx == cur_idx:
 		data.characters = data_container.get_node('Characters').get_data()
+		data.quest_name = data_container.get_node('QuestName').get_data()
 	else:
 		data.characters = metadata['characters']
 	data.variables = metadata['variables'].get_data()

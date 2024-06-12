@@ -15,7 +15,7 @@ nodes = {
 },
 "1_1": {
 "dialogue": "Hey there!",
-"offset": Vector2(220, 0),
+"offset": Vector2(300, 0),
 "options": {
 0: {
 "condition": {},
@@ -28,7 +28,7 @@ nodes = {
 },
 "2_1": {
 "comment": "A basic example",
-"offset": Vector2(-20, 100),
+"offset": Vector2(0, 160),
 "size": Vector2(200, 100)
 }
 }
@@ -36,3 +36,4 @@ variables = {}
 strays = Array[String](["2_1"])
 characters = ""
 quest_name = ""
+quest_description = ""

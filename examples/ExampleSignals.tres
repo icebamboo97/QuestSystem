@@ -16,7 +16,7 @@ nodes = {
 "1_1": {
 "dialogue": "You can trigger a signal from your dialogue.
 Additionally you can pass a value with the signal and use it in your code.",
-"offset": Vector2(220, 0),
+"offset": Vector2(280, 0),
 "options": {
 0: {
 "condition": {},
@@ -34,7 +34,7 @@ Additionally you can pass a value with the signal and use it in your code.",
 },
 "1_2": {
 "dialogue": "The signal triggered the code in the demo to create an explosion.",
-"offset": Vector2(800, 0),
+"offset": Vector2(1020, 0),
 "options": {
 0: {
 "condition": {},
@@ -52,7 +52,7 @@ Additionally you can pass a value with the signal and use it in your code.",
 },
 "3_1": {
 "link": &"1_2",
-"offset": Vector2(560, 0),
+"offset": Vector2(700, 0),
 "signalValue": "explode"
 }
 }
@@ -60,3 +60,4 @@ variables = {}
 strays = Array[String]([])
 characters = ""
 quest_name = ""
+quest_description = ""

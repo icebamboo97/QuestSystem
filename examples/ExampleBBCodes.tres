@@ -94,3 +94,4 @@ variables = {}
 strays = Array[String]([])
 characters = ""
 quest_name = ""
+quest_description = ""

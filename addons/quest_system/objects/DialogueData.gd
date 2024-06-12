@@ -18,3 +18,5 @@ extends Resource
 @export var characters := ''
 ## Quest Name
 @export var quest_name : String = ''
+## Quest Description
+@export var quest_description : String = ''

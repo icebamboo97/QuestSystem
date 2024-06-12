@@ -29,8 +29,10 @@ func _ready():
 	confirm_dialog.add_button('Discard', true, 'discard_file')
 	confirm_dialog.add_cancel_button('Cancel')
 	
+	#注册修改事件
 	data_container.get_node('Characters').modified.connect(_on_data_modified)
-	data_container.modified.connect(_on_data_modified)
+	data_container.get_node('QuestName').modified.connect(_on_data_modified)
+	data_container.get_node('QuestDescription').modified.connect(_on_data_modified)
 
 func create_entry(file_name : String, path : String, data : DialogueData):
 	var new_idx : int = item_count
@@ -51,6 +53,7 @@ func create_entry(file_name : String, path : String, data : DialogueData):
 			'graph': null,
 			'modified': false,
 			'quest_name':data.quest_name,
+			'quest_description':data.quest_description,
 			}
 		
 		# create graph node for this file
@@ -136,10 +139,12 @@ func save_file(idx := cur_idx):
 	var data : DialogueData = metadata['graph'].get_data()
 	if idx == cur_idx:
 		data.characters = data_container.get_node('Characters').get_data()
-		data.quest_name = data_container.get_name_data()
+		data.quest_name = data_container.get_node('QuestName').get_data()
+		data.quest_name = data_container.get_node('QuestDescription').get_data()
 	else:
 		data.characters = metadata['characters']
 		data.quest_name = metadata['quest_name']
+		data.quest_description = metadata['quest_description']
 	data.variables = metadata['variables'].get_data()
 	
 	# save to file
@@ -163,7 +168,8 @@ func save_as(path : String):
 	var data : DialogueData = metadata['graph'].get_data()
 	data.characters = data_container.get_node('Characters').get_data()
 	data.variables = metadata['variables'].get_data()
-	data.quest_name = data_container.get_name_data()
+	data.quest_name = data_container.get_node('QuestName').get_data()
+	data.quest_description = data_container.get_node('QuestDescription').get_data()
 	
 	# create entry for file
 	create_entry(file_name, path, data)
@@ -252,16 +258,19 @@ func switch_file(idx : int, ensure_path := ''):
 			workspace.remove_child(cur_metadata['graph'])
 		if data_container.has_node('Variables'):
 			data_container.remove_child(cur_metadata['variables'])
+		# 旧任务数据缓存
 		cur_metadata['characters'] = data_container.get_node('Characters').get_data()
-		cur_metadata['quest_name'] = data_container.get_name_data()
+		cur_metadata['quest_name'] = data_container.get_node('QuestName').get_data()
+		cur_metadata['quest_description'] = data_container.get_node('QuestDescription').get_data()
 		set_item_metadata(cur_idx, cur_metadata)
 	
 	# add new nodes
 	data_container.get_node('Characters').characters_updated.connect(new_metadata['graph']._on_characters_updated)
 	workspace.add_child(new_metadata['graph'])
+	# 新任务数据加载
 	data_container.get_node('Characters').load_data(new_metadata['characters'])
-	# 任务名加载
-	data_container.load_data(new_metadata['quest_name'])
+	data_container.get_node('QuestName').load_data(new_metadata['quest_name'])
+	data_container.get_node('QuestDescription').load_data(new_metadata['quest_description'])
 	editor.add_menu.get_popup().id_pressed.connect(new_metadata['graph']._on_add_menu_pressed)
 	data_container.add_child(new_metadata['variables'])
 	

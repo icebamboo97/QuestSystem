@@ -1,11 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://bqscglixmr4bd"]
+[gd_scene load_steps=24 format=3 uid="uid://bqscglixmr4bd"]
 
 [ext_resource type="Script" path="res://addons/quest_system/editor/editor.gd" id="1_f16jc"]
+[ext_resource type="Script" path="res://addons/quest_system/editor/questTypeList.gd" id="2_8y2rt"]
 [ext_resource type="Script" path="res://addons/quest_system/editor/files.gd" id="2_darcx"]
-[ext_resource type="Script" path="res://addons/quest_system/editor/data.gd" id="3_6sgqe"]
 [ext_resource type="Script" path="res://addons/quest_system/editor/characters.gd" id="3_285lm"]
+[ext_resource type="Script" path="res://addons/quest_system/editor/questDescription.gd" id="4_mwo32"]
 [ext_resource type="Texture2D" uid="uid://cf5ef41yo6jl6" path="res://addons/quest_system/icons/Reload.svg" id="4_qunvm"]
+[ext_resource type="Script" path="res://addons/quest_system/editor/questName.gd" id="4_xobs1"]
 [ext_resource type="Texture2D" uid="uid://buayifvickq2l" path="res://addons/quest_system/icons/Folder.svg" id="5_41leg"]
+[ext_resource type="Script" path="res://addons/quest_system/editor/questType.gd" id="5_bs3ik"]
 [ext_resource type="Texture2D" uid="uid://cc1ufhyvste6m" path="res://addons/quest_system/icons/Forward.svg" id="6_k8af1"]
 [ext_resource type="Texture2D" uid="uid://bnlg07ckbg0w" path="res://addons/quest_system/icons/Back.svg" id="7_81mhy"]
 [ext_resource type="FontFile" uid="uid://dv4rnn0ml62q3" path="res://addons/quest_system/themes/Poppins-Bold.ttf" id="8_s5fry"]
@@ -118,6 +121,31 @@ popup/item_0/text = "Print Debug Messages"
 popup/item_0/checkable = 1
 popup/item_0/id = 0
 
+[node name="QuestTypeList" type="HBoxContainer" parent="Main/ToolBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+script = ExtResource("2_8y2rt")
+editor_path = NodePath("../../..")
+
+[node name="Label" type="Label" parent="Main/ToolBar/QuestTypeList"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Quests Data:"
+
+[node name="Path" type="TextEdit" parent="Main/ToolBar/QuestTypeList"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "File Path"
+scroll_fit_content_height = true
+
+[node name="LoadButton" type="Button" parent="Main/ToolBar/QuestTypeList"]
+layout_mode = 2
+size_flags_horizontal = 8
+icon = ExtResource("5_41leg")
+
+[node name="FileDialog" type="FileDialog" parent="Main/ToolBar/QuestTypeList"]
+
 [node name="Workspace" type="HSplitContainer" parent="Main"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -177,21 +205,39 @@ dialog_autowrap = true
 [node name="Data" type="VBoxContainer" parent="Main/Workspace/SidePanel"]
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("3_6sgqe")
 
-[node name="QuestNameTitle" type="Label" parent="Main/Workspace/SidePanel/Data"]
+[node name="QuestName" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data"]
 layout_mode = 2
-text = "QuestName"
+script = ExtResource("4_xobs1")
 
-[node name="QuestName" type="TextEdit" parent="Main/Workspace/SidePanel/Data"]
+[node name="Title" type="Label" parent="Main/Workspace/SidePanel/Data/QuestName"]
+layout_mode = 2
+text = "Name"
+
+[node name="QuestNameLine" type="LineEdit" parent="Main/Workspace/SidePanel/Data/QuestName"]
+layout_mode = 2
+
+[node name="QuestDescription" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data"]
+layout_mode = 2
+script = ExtResource("4_mwo32")
+
+[node name="Title" type="Label" parent="Main/Workspace/SidePanel/Data/QuestDescription"]
+layout_mode = 2
+text = "Description"
+
+[node name="DescriptionText" type="TextEdit" parent="Main/Workspace/SidePanel/Data/QuestDescription"]
 layout_mode = 2
 scroll_fit_content_height = true
 
-[node name="QuestTypeTitle" type="Label" parent="Main/Workspace/SidePanel/Data"]
+[node name="QuestType" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data"]
 layout_mode = 2
-text = "QuestType"
+script = ExtResource("5_bs3ik")
 
-[node name="QuestTypeOptionButton" type="OptionButton" parent="Main/Workspace/SidePanel/Data"]
+[node name="QuestTypeTitle" type="Label" parent="Main/Workspace/SidePanel/Data/QuestType"]
+layout_mode = 2
+text = "Type"
+
+[node name="QuestTypeOptionButton" type="OptionButton" parent="Main/Workspace/SidePanel/Data/QuestType"]
 layout_mode = 2
 
 [node name="Characters" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data"]
@@ -215,6 +261,7 @@ flat = true
 [node name="FilePath" type="TextEdit" parent="Main/Workspace/SidePanel/Data/Characters/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "File Path"
 scroll_fit_content_height = true
 
 [node name="LoadButton" type="Button" parent="Main/Workspace/SidePanel/Data/Characters/HBoxContainer"]
@@ -278,6 +325,9 @@ script = ExtResource("12_fcf8m")
 custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_ogokn"), SubResource("RichTextEffect_w8v0c"), SubResource("RichTextEffect_vxsx5")])
 
 [connection signal="about_to_popup" from="Main/ToolBar/RunMenu" to="." method="_on_run_menu_about_to_popup"]
+[connection signal="text_changed" from="Main/ToolBar/QuestTypeList/Path" to="Main/ToolBar/QuestTypeList" method="_on_path_text_changed"]
+[connection signal="pressed" from="Main/ToolBar/QuestTypeList/LoadButton" to="Main/ToolBar/QuestTypeList" method="_on_load_button_pressed"]
+[connection signal="file_selected" from="Main/ToolBar/QuestTypeList/FileDialog" to="Main/ToolBar/QuestTypeList" method="_on_file_dialog_file_selected"]
 [connection signal="empty_clicked" from="Main/Workspace/SidePanel/Files" to="Main/Workspace/SidePanel/Files" method="_on_empty_clicked"]
 [connection signal="file_list_changed" from="Main/Workspace/SidePanel/Files" to="." method="_on_files_changed"]
 [connection signal="file_switched" from="Main/Workspace/SidePanel/Files" to="." method="_on_files_changed"]
@@ -289,7 +339,8 @@ custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_ogokn"), Sub
 [connection signal="file_selected" from="Main/Workspace/SidePanel/Files/SaveDialog" to="Main/Workspace/SidePanel/Files" method="save_as"]
 [connection signal="canceled" from="Main/Workspace/SidePanel/Files/ConfirmationDialog" to="Main/Workspace/SidePanel/Files" method="_on_confirm_dialog_canceled"]
 [connection signal="custom_action" from="Main/Workspace/SidePanel/Files/ConfirmationDialog" to="Main/Workspace/SidePanel/Files" method="_on_confirm_dialog_action"]
-[connection signal="text_changed" from="Main/Workspace/SidePanel/Data/QuestName" to="Main/Workspace/SidePanel/Data" method="_on_quest_name_text_changed"]
+[connection signal="text_changed" from="Main/Workspace/SidePanel/Data/QuestName/QuestNameLine" to="Main/Workspace/SidePanel/Data/QuestName" method="_on_quest_name_line_text_changed"]
+[connection signal="text_changed" from="Main/Workspace/SidePanel/Data/QuestDescription/DescriptionText" to="Main/Workspace/SidePanel/Data/QuestDescription" method="_on_description_text_text_changed"]
 [connection signal="pressed" from="Main/Workspace/SidePanel/Data/Characters/HBoxContainer/ResetButton" to="Main/Workspace/SidePanel/Data/Characters" method="_on_reset_button_pressed"]
 [connection signal="text_changed" from="Main/Workspace/SidePanel/Data/Characters/HBoxContainer/FilePath" to="Main/Workspace/SidePanel/Data/Characters" method="_on_file_path_text_changed"]
 [connection signal="pressed" from="Main/Workspace/SidePanel/Data/Characters/HBoxContainer/LoadButton" to="Main/Workspace/SidePanel/Data/Characters" method="_on_load_button_pressed"]

@@ -223,3 +223,4 @@ variables = {}
 strays = Array[String]([])
 characters = "res://examples/Characters.tres"
 quest_name = ""
+quest_description = ""

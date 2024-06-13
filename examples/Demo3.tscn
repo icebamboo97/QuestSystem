@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dhwoh3ay4mp3c"]
+[gd_scene load_steps=24 format=3 uid="uid://dhwoh3ay4mp3c"]
 
 [ext_resource type="Script" path="res://examples/demo3.gd" id="1_2a8yf"]
 [ext_resource type="AudioStream" uid="uid://bin1ei6yesmjv" path="res://examples/voice.ogg" id="2_bjs48"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://addons/quest_system/objects/bbcodeMatrix.gd" id="6_pkic0"]
 [ext_resource type="Script" path="res://addons/quest_system/objects/DialogueBubble.gd" id="7_wf6dy"]
 [ext_resource type="Resource" uid="uid://cwtdfv6yke8ri" path="res://examples/ExampleBubble.tres" id="8_qbppo"]
+[ext_resource type="Texture2D" uid="uid://bucad3kf5mxvp" path="res://addons/quest_system/icons/Play.svg" id="9_w41gt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xk202"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -108,7 +109,17 @@ autowrap_mode = 0
 custom_effects = [SubResource("RichTextEffect_akgkw"), SubResource("RichTextEffect_el6u0"), SubResource("RichTextEffect_oo7i8")]
 script = ExtResource("7_wf6dy")
 data = ExtResource("8_qbppo")
+start_id = ""
+smooth_follow = 10
+bubble_offset = 72
+tail_color = Color(0.133333, 0.133333, 0.133333, 1)
+tail_offset = 32
+tail_base = 8
+default_speaker_color = Color(1, 1, 1, 1)
+skip_input_action = "ui_cancel"
 dialogue_custom_effects = [SubResource("RichTextEffect_akgkw"), SubResource("RichTextEffect_el6u0"), SubResource("RichTextEffect_oo7i8")]
+max_options_count = 2
+next_icon = ExtResource("9_w41gt")
 
 [connection signal="dialogue_processed" from="DialogueBubble" to="." method="_on_dialogue_processed"]
 [connection signal="dialogue_signal" from="DialogueBubble" to="." method="_on_dialogue_signal"]

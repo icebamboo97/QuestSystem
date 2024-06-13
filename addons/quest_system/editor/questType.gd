@@ -32,7 +32,11 @@ func _on_quest_type_updated(quest_type_list : Array[QuestTypeData]):
 		print('Quest type size :',quest_type_option_button.size )
 
 func get_data():
-	return cur_quest_type_list[quest_type_option_button.selected]
+	if quest_type_option_button.selected == -1:
+		printt("The Quest Need select type !")
+		return cur_quest_type_list[cur_quest_type]
+	else:
+		return cur_quest_type_list[quest_type_option_button.selected]
 	
 func load_data(quest_type : QuestTypeData):
 	if editor._debug:

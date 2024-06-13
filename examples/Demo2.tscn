@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dexedy1bup8vh"]
+[gd_scene load_steps=16 format=3 uid="uid://dexedy1bup8vh"]
 
 [ext_resource type="Theme" uid="uid://dc6c1peo4pfyr" path="res://addons/quest_system/themes/bubbly.theme" id="1_fbp1s"]
 [ext_resource type="Script" path="res://examples/audioDemo.gd" id="2_2jvcg"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://addons/quest_system/objects/DialogueBox.gd" id="4_x7bn6"]
 [ext_resource type="AudioStream" uid="uid://bin1ei6yesmjv" path="res://examples/voice.ogg" id="7_au5ch"]
 [ext_resource type="Script" path="res://addons/quest_system/objects/bbcodeMatrix.gd" id="8_2keth"]
+[ext_resource type="Script" path="res://addons/quest_system/gameplay_nodes/QuestUpdate.gd" id="9_vg65h"]
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_c6wh6"]
 script = ExtResource("2_435yb")
@@ -16,6 +17,15 @@ script = ExtResource("2_435yb")
 script = ExtResource("3_xlyqn")
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_fu5un"]
+script = ExtResource("8_2keth")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_n6jq2"]
+script = ExtResource("2_435yb")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_0qmsd"]
+script = ExtResource("3_xlyqn")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_t1ot7"]
 script = ExtResource("8_2keth")
 
 [node name="Demo2" type="Control"]
@@ -64,5 +74,9 @@ custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_c6wh6"), Sub
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_au5ch")
+
+[node name="QuestUpdate" type="Node" parent="."]
+script = ExtResource("9_vg65h")
+custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_n6jq2"), SubResource("RichTextEffect_0qmsd"), SubResource("RichTextEffect_t1ot7")])
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

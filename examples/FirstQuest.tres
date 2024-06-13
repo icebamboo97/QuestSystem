@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="QuestData" load_steps=4 format=3 uid="uid://es8uisdr183a"]
 
-[ext_resource type="Script" path="res://addons/quest_system/objects/QuestTypeData.gd" id="1_eic5w"]
+[ext_resource type="Script" path="res://addons/quest_system/objects/QuestTypeData.gd" id="1_m0nvg"]
 [ext_resource type="Script" path="res://addons/quest_system/objects/QuestData.gd" id="1_u3k4g"]
 
 [sub_resource type="Resource" id="Resource_td011"]
-script = ExtResource("1_eic5w")
+script = ExtResource("1_m0nvg")
 name = "主线"
 color = Color(1, 1, 0, 1)
 
@@ -35,7 +35,7 @@ nodes = {
 },
 "1_2": {
 "dialogue": "第二步描述",
-"offset": Vector2(560, 260),
+"offset": Vector2(580, 260),
 "options": {
 0: {
 "condition": {},

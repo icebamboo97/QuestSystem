@@ -1,7 +1,7 @@
 @tool
 ## A parser for reading and processing [param QuestData] files
-@icon('res://addons/quest_system/icons/DialogueParser.svg')
-class_name DialogueParser
+@icon('res://addons/quest_system/icons/QuestParser.svg')
+class_name QuestParser
 extends Node
 # TODO : Fix [wait] bbcode
 
@@ -92,7 +92,7 @@ func select_option(idx : int):
 	_proceed(_option_links[idx])
 
 
-## Returns [code]true[/code] if the [DialogueParser] is processing a dialogue tree.
+## Returns [code]true[/code] if the [QuestParser] is processing a dialogue tree.
 func is_running(): return _running
 
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dr0i7ng6lymhm"
-path="res://.godot/imported/DialogueParser.svg-660571b875389722d9fc799248773daf.ctex"
+path="res://.godot/imported/QuestParser.svg-aad691ccb9ec41ed38c6b9532d8a79ad.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/quest_system/icons/DialogueParser.svg"
-dest_files=["res://.godot/imported/DialogueParser.svg-660571b875389722d9fc799248773daf.ctex"]
+source_file="res://addons/quest_system/icons/QuestParser.svg"
+dest_files=["res://.godot/imported/QuestParser.svg-aad691ccb9ec41ed38c6b9532d8a79ad.ctex"]
 
 [params]
 

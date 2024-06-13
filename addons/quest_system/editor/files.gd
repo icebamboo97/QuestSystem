@@ -21,7 +21,9 @@ const GraphScene = preload("res://addons/quest_system/editor/Graph.tscn")
 var file_icon := preload('res://addons/quest_system/icons/Script.svg')
 var cur_idx := -1
 var deletion_queue := []
-
+var placeholder_graph
+# TODO:没有数据不进行覆盖
+var is_golbal_quest_data_loaded := false
 
 func _ready():
 	confirm_dialog.get_ok_button().hide()
@@ -34,8 +36,16 @@ func _ready():
 	data_container.get_node('QuestName').modified.connect(_on_data_modified)
 	data_container.get_node('QuestDescription').modified.connect(_on_data_modified)
 	data_container.get_node('QuestType').modified.connect(_on_data_modified)
+	
+	# make cool
+	placeholder_graph = GraphEdit.new()
+	workspace.add_child.call_deferred(placeholder_graph)
 
 func create_entry(file_name : String, path : String, data : QuestData):
+	if placeholder_graph != null:
+		workspace.remove_child(placeholder_graph)
+		placeholder_graph.queue_free()
+	
 	var new_idx : int = item_count
 	
 	# check if the file is already loaded

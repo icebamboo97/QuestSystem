@@ -37,7 +37,6 @@ func _ready():
 	config.load('res://addons/quest_system/plugin.cfg')
 	version_number.text = config.get_value('plugin', 'version')
 
-
 func run_tree(start_node_idx : int):
 	if not is_instance_valid(graph): return
 	

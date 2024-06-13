@@ -143,9 +143,9 @@ var dialogue_label : RichTextLabel
 ## Contains all the option buttons. The currently displayed options are visible while the rest are hidden. This value is automatically set while running a dialogue tree.
 var options_container : BoxContainer
 
-# [param DialogueParser] used for parsing the dialogue [member data].
-# NOTE: Using [param DialogueParser] as a child instead of extending from it, because [DialogueBox] needs to extend from [Panel].
-var _dialogue_parser : DialogueParser
+# [param QuestParser] used for parsing the dialogue [member data].
+# NOTE: Using [param QuestParser] as a child instead of extending from it, because [DialogueBox] needs to extend from [Panel].
+var _dialogue_parser : QuestParser
 var _main_container : BoxContainer
 var _sub_container : BoxContainer
 var _wait_effect : RichTextWait
@@ -196,7 +196,7 @@ func _enter_tree():
 	options_container.alignment = BoxContainer.ALIGNMENT_END
 	max_options_count = max_options_count
 	
-	_dialogue_parser = DialogueParser.new()
+	_dialogue_parser = QuestParser.new()
 	add_child(_dialogue_parser)
 	_dialogue_parser.data = data
 	variables = _dialogue_parser.variables

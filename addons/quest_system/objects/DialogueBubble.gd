@@ -1,6 +1,6 @@
 @tool
 ## A node for displaying branching dialogues, primarily created using the Dialogue Nodes editor.[br]
-## NOTE: This node is not good at handling long paragraphs of text. It is recommended to use [DialogueBox] instead, or create your custom implementation using [DialogueParser].
+## NOTE: This node is not good at handling long paragraphs of text. It is recommended to use [DialogueBox] instead, or create your custom implementation using [QuestParser].
 ## @experimental
 class_name DialogueBubble
 extends RichTextLabel
@@ -115,9 +115,9 @@ var speaker_label : Label
 ## Contains all the option buttons. The currently displayed options are visible while the rest are hidden. This value is automatically set while running a dialogue tree.
 var options_container : BoxContainer
 
-# [param DialogueParser] used for parsing the dialogue [member data].
-# NOTE: Using [param DialogueParser] as a child instead of extending from it, because [DialogueBox] needs to extend from Panel.
-var _dialogue_parser : DialogueParser
+# [param QuestParser] used for parsing the dialogue [member data].
+# NOTE: Using [param QuestParser] as a child instead of extending from it, because [DialogueBox] needs to extend from Panel.
+var _dialogue_parser : QuestParser
 var _visible_on_screen_notifier : VisibleOnScreenNotifier3D
 var _wait_effect : RichTextWait
 var _fade_tween : Tween
@@ -171,7 +171,7 @@ func _enter_tree():
 	_visible_on_screen_notifier.screen_entered.connect(_on_screen_entered)
 	_visible_on_screen_notifier.screen_exited.connect(_on_screen_exited)
 	
-	_dialogue_parser = DialogueParser.new()
+	_dialogue_parser = QuestParser.new()
 	add_child(_dialogue_parser)
 	_dialogue_parser.data = data
 	variables = _dialogue_parser.variables

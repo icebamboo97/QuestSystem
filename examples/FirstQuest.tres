@@ -25,12 +25,27 @@ nodes = {
 "options": {
 0: {
 "condition": {},
+"link": &"1_2",
+"text": ""
+}
+},
+"size": Vector2(300, 240),
+"speaker": "",
+"title": "第一步"
+},
+"1_2": {
+"dialogue": "第二步描述",
+"offset": Vector2(560, 260),
+"options": {
+0: {
+"condition": {},
 "link": "END",
 "text": ""
 }
 },
 "size": Vector2(300, 240),
-"speaker": ""
+"speaker": "",
+"title": "第二步"
 }
 }
 variables = {}

@@ -10,11 +10,33 @@ color = Color(1, 1, 0, 1)
 
 [resource]
 script = ExtResource("1_we7oj")
-starts = {}
-nodes = {}
+starts = {
+"START": &"0_1"
+}
+nodes = {
+"0_1": {
+"link": &"1_1",
+"offset": Vector2(101, 263),
+"start_id": "START"
+},
+"1_1": {
+"dialogue": "",
+"offset": Vector2(466, 318),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": ""
+}
+},
+"size": Vector2(300, 240),
+"speaker": "",
+"title": "hello"
+}
+}
 variables = {}
 strays = Array[String]([])
 characters = ""
-quest_name = ""
-quest_description = ""
+quest_name = "第二个任务"
+quest_description = "第二个任务描述"
 quest_type = SubResource("Resource_td011")

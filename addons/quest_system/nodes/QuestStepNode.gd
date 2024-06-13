@@ -11,6 +11,7 @@ signal connection_shift_request(from_node : String, old_port : int, new_port : i
 @export var resize_timer : Timer
 @export var custom_speaker_timer : Timer
 @export var dialogue_timer : Timer
+@export var title_timer : Timer
 
 @onready var speaker = %Speaker
 @onready var custom_speaker = %CustomSpeaker
@@ -19,11 +20,11 @@ signal connection_shift_request(from_node : String, old_port : int, new_port : i
 @onready var dialogue_panel = %DialoguePanel
 @onready var dialogue_expanded = %DialogueExpanded
 @onready var title_line: LineEdit = %TitleLine
-## TODO:完成title_line的功能
 
 var undo_redo : EditorUndoRedoManager
 var last_size := size
 var last_custom_speaker := ''
+var last_title_line := ''
 var cur_speaker := -1
 var last_dialogue := ''
 var OptionScene := preload("res://addons/quest_system/nodes/DialogueNodeOption.tscn")
@@ -56,6 +57,7 @@ func _to_dict(graph : GraphEdit):
 			speaker_idx = cur_speaker
 		dict['speaker'] = speaker_idx
 	
+	dict['title'] = title_line.text
 	dict['dialogue'] = dialogue.text
 	dict['size'] = size
 	
@@ -101,6 +103,8 @@ func _from_dict(dict : Dictionary):
 		cur_speaker = dict['speaker']
 		character_toggle.set_pressed_no_signal(true)
 		toggle_speaker_input(true)
+	title_line.text = dict['title']
+	last_title_line = title_line.text
 	dialogue.text = dict['dialogue']
 	dialogue_expanded.text = dialogue.text
 	last_dialogue = dialogue.text
@@ -139,6 +143,10 @@ func _from_dict(dict : Dictionary):
 	
 	return next_nodes
 
+func set_title_line(new_title_line : String):
+	if title_line.text != new_title_line:
+		title_line.text = new_title_line
+	last_title_line = title_line.text
 
 func set_custom_speaker(new_custom_speaker : String):
 	if custom_speaker.text != new_custom_speaker:
@@ -278,6 +286,22 @@ func _on_speaker_toggled(toggled_on : bool):
 	undo_redo.commit_action()
 
 
+func _on_title_line_text_changed(new_text):
+	title_timer.stop()
+	title_timer.start()
+
+
+func _on_title_timer_timeout():
+	if not undo_redo: return
+	
+	undo_redo.create_action('Set title text')
+	
+	undo_redo.add_do_method(self, 'set_title_line', title_line.text)
+	undo_redo.add_do_method(self, '_on_modified')
+	undo_redo.add_undo_method(self, '_on_modified')
+	undo_redo.add_undo_method(self, 'set_title_line', last_title_line)
+	undo_redo.commit_action()
+
 func _on_dialogue_text_changed():
 	dialogue_timer.stop()
 	dialogue_timer.start()
@@ -394,3 +418,4 @@ func _on_option_focus_exited(option : BoxContainer):
 
 func _on_modified():
 	modified.emit()
+

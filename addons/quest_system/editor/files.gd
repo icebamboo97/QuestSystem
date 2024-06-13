@@ -29,10 +29,11 @@ func _ready():
 	confirm_dialog.add_button('Discard', true, 'discard_file')
 	confirm_dialog.add_cancel_button('Cancel')
 	
-	#注册修改事件
+	#添加新数据:1.注册修改事件
 	data_container.get_node('Characters').modified.connect(_on_data_modified)
 	data_container.get_node('QuestName').modified.connect(_on_data_modified)
 	data_container.get_node('QuestDescription').modified.connect(_on_data_modified)
+	data_container.get_node('QuestType').modified.connect(_on_data_modified)
 
 func create_entry(file_name : String, path : String, data : QuestData):
 	var new_idx : int = item_count
@@ -44,6 +45,7 @@ func create_entry(file_name : String, path : String, data : QuestData):
 			new_idx = idx
 			already_loaded = true
 	
+	#添加新数据:2
 	if not already_loaded:
 		var metadata := {
 			'display_name': file_name,
@@ -54,6 +56,7 @@ func create_entry(file_name : String, path : String, data : QuestData):
 			'modified': false,
 			'quest_name':data.quest_name,
 			'quest_description':data.quest_description,
+			'quest_type':data.quest_type,
 			}
 		
 		# create graph node for this file
@@ -136,15 +139,18 @@ func save_file(idx := cur_idx):
 	
 	var metadata := get_item_metadata(idx)
 	
+	#添加新数据:3
 	var data : QuestData = metadata['graph'].get_data()
 	if idx == cur_idx:
 		data.characters = data_container.get_node('Characters').get_data()
 		data.quest_name = data_container.get_node('QuestName').get_data()
 		data.quest_description = data_container.get_node('QuestDescription').get_data()
+		data.quest_type = data_container.get_node('QuestType').get_data()
 	else:
 		data.characters = metadata['characters']
 		data.quest_name = metadata['quest_name']
 		data.quest_description = metadata['quest_description']
+		data.quest_type = metadata['quest_type']
 	data.variables = metadata['variables'].get_data()
 	
 	# save to file
@@ -165,11 +171,13 @@ func save_as(path : String):
 	var file_name : String = path.split('/')[-1]
 	var metadata := get_item_metadata(cur_idx)
 	
+	#添加新数据:4
 	var data : QuestData = metadata['graph'].get_data()
 	data.characters = data_container.get_node('Characters').get_data()
 	data.variables = metadata['variables'].get_data()
 	data.quest_name = data_container.get_node('QuestName').get_data()
 	data.quest_description = data_container.get_node('QuestDescription').get_data()
+	data.quest_type = data_container.get_node('QuestType').get_data()
 	
 	# create entry for file
 	create_entry(file_name, path, data)
@@ -249,6 +257,7 @@ func switch_file(idx : int, ensure_path := ''):
 	if ensure_path != '' and new_metadata['path'] != ensure_path:
 		return
 	
+	#添加新数据:5
 	# remove previous nodes if any and update character metadata
 	if cur_idx > -1:
 		var cur_metadata := get_item_metadata(cur_idx)
@@ -262,6 +271,7 @@ func switch_file(idx : int, ensure_path := ''):
 		cur_metadata['characters'] = data_container.get_node('Characters').get_data()
 		cur_metadata['quest_name'] = data_container.get_node('QuestName').get_data()
 		cur_metadata['quest_description'] = data_container.get_node('QuestDescription').get_data()
+		cur_metadata['quest_type'] = data_container.get_node('QuestType').get_data()
 		set_item_metadata(cur_idx, cur_metadata)
 	
 	# add new nodes
@@ -271,6 +281,7 @@ func switch_file(idx : int, ensure_path := ''):
 	data_container.get_node('Characters').load_data(new_metadata['characters'])
 	data_container.get_node('QuestName').load_data(new_metadata['quest_name'])
 	data_container.get_node('QuestDescription').load_data(new_metadata['quest_description'])
+	data_container.get_node('QuestType').load_data(new_metadata['quest_type'])
 	editor.add_menu.get_popup().id_pressed.connect(new_metadata['graph']._on_add_menu_pressed)
 	data_container.add_child(new_metadata['variables'])
 	

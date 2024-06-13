@@ -9,6 +9,7 @@ signal global_quest_data_updated(global_quest_data : GlobalQuestData)
 @onready var file_path: TextEdit = $Path
 @onready var load_button: Button = $LoadButton
 @onready var file_dialog: FileDialog = $FileDialog
+@onready var quest_type = $"../../Workspace/SidePanel/Data/QuestType"
 
 var editor
 var last_file_path : String
@@ -23,17 +24,19 @@ func load_data(path : String):
 	last_file_path = path
 	
 	var resource : Resource
-	var global_quest_data := GlobalQuestData
+	var quest_type_list : Array[QuestTypeData] = []
 	if path.ends_with('.tres') and ResourceLoader.exists(path):
 		resource = ResourceLoader.load(path, '', ResourceLoader.CACHE_MODE_REPLACE)
 		if resource is GlobalQuestData:
-			global_quest_data_updated.emit(global_quest_data)
+			quest_type_list = resource.quest_type_list
+			
+	quest_type._on_quest_type_updated(quest_type_list)
 			
 	if editor._debug:
 		print('Global quest data set: ', path)
 		if path.ends_with('.tres'):
 			if resource is GlobalQuestData:
-				print('Loaded quest type:', resource.quest_type_list)
+				print('Loaded quest type:', quest_type_list)
 			else:
 				printerr('Selected file is not a GlobalQuestData resource')
 

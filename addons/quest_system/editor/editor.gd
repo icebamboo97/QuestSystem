@@ -13,8 +13,6 @@ extends Control
 @onready var version_number = $Main/Statusbar/VersionNumber
 @onready var dialogue_background = $DialogueBackground
 @onready var dialogue_box = $DialogueBox
-@onready var quest_type = $Main/Workspace/SidePanel/Data/QuestType
-@onready var quest_type_list = $Main/ToolBar/QuestTypeList
 
 var undo_redo : EditorUndoRedoManager
 var graph : GraphEdit
@@ -33,8 +31,7 @@ func _ready():
 	dialogue_box.dialogue_signal.connect(_on_dialogue_signal)
 	dialogue_box.variable_changed.connect(_on_dialogue_variable_changed)
 	dialogue_box.dialogue_ended.connect(_on_dialogue_ended)
-	
-	quest_type_list.global_quest_data_updated.connect(_on_globle_quest_data_loaded)
+
 	
 	var config = ConfigFile.new()
 	config.load('res://addons/quest_system/plugin.cfg')
@@ -155,6 +152,3 @@ func _on_dialogue_ended():
 
 	if _debug:
 		print('Dialogue ended')
-
-func _on_globle_quest_data_loaded(global_quest_data : GlobalQuestData):
-	quest_type._on_quest_type_updated(global_quest_data.quest_type_list)

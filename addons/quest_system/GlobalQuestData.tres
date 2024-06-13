@@ -5,12 +5,12 @@
 
 [sub_resource type="Resource" id="Resource_td011"]
 script = ExtResource("1_ac87h")
-name = "Main"
+name = "主线"
 color = Color(1, 1, 0, 1)
 
 [sub_resource type="Resource" id="Resource_smw5e"]
 script = ExtResource("1_ac87h")
-name = "Side "
+name = "支线"
 color = Color(0.0235294, 1, 1, 1)
 
 [resource]

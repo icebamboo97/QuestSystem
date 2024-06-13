@@ -1,6 +1,12 @@
-[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3 uid="uid://es8uisdr183a"]
+[gd_resource type="Resource" script_class="QuestData" load_steps=4 format=3 uid="uid://es8uisdr183a"]
 
+[ext_resource type="Script" path="res://addons/quest_system/objects/QuestTypeData.gd" id="1_eic5w"]
 [ext_resource type="Script" path="res://addons/quest_system/objects/QuestData.gd" id="1_u3k4g"]
+
+[sub_resource type="Resource" id="Resource_td011"]
+script = ExtResource("1_eic5w")
+name = "主线"
+color = Color(1, 1, 0, 1)
 
 [resource]
 script = ExtResource("1_u3k4g")
@@ -32,3 +38,4 @@ strays = Array[String]([])
 characters = ""
 quest_name = "第一个任务"
 quest_description = "第一个任务描述"
+quest_type = SubResource("Resource_td011")

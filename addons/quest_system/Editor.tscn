@@ -349,6 +349,7 @@ custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_ogokn"), Sub
 [connection signal="custom_action" from="Main/Workspace/SidePanel/Files/ConfirmationDialog" to="Main/Workspace/SidePanel/Files" method="_on_confirm_dialog_action"]
 [connection signal="text_changed" from="Main/Workspace/SidePanel/Data/QuestName/QuestNameLine" to="Main/Workspace/SidePanel/Data/QuestName" method="_on_quest_name_line_text_changed"]
 [connection signal="text_changed" from="Main/Workspace/SidePanel/Data/QuestDescription/DescriptionText" to="Main/Workspace/SidePanel/Data/QuestDescription" method="_on_description_text_text_changed"]
+[connection signal="item_selected" from="Main/Workspace/SidePanel/Data/QuestType/QuestTypeOptionButton" to="Main/Workspace/SidePanel/Data/QuestType" method="_on_quest_type_option_button_item_selected"]
 [connection signal="pressed" from="Main/Workspace/SidePanel/Data/Characters/HBoxContainer/ResetButton" to="Main/Workspace/SidePanel/Data/Characters" method="_on_reset_button_pressed"]
 [connection signal="text_changed" from="Main/Workspace/SidePanel/Data/Characters/HBoxContainer/FilePath" to="Main/Workspace/SidePanel/Data/Characters" method="_on_file_path_text_changed"]
 [connection signal="pressed" from="Main/Workspace/SidePanel/Data/Characters/HBoxContainer/LoadButton" to="Main/Workspace/SidePanel/Data/Characters" method="_on_load_button_pressed"]

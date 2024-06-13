@@ -1,6 +1,12 @@
-[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3 uid="uid://c0k4crwaolqc1"]
+[gd_resource type="Resource" script_class="QuestData" load_steps=4 format=3 uid="uid://c0k4crwaolqc1"]
 
+[ext_resource type="Script" path="res://addons/quest_system/objects/QuestTypeData.gd" id="1_a12hh"]
 [ext_resource type="Script" path="res://addons/quest_system/objects/QuestData.gd" id="1_we7oj"]
+
+[sub_resource type="Resource" id="Resource_td011"]
+script = ExtResource("1_a12hh")
+name = "主线"
+color = Color(1, 1, 0, 1)
 
 [resource]
 script = ExtResource("1_we7oj")
@@ -11,3 +17,4 @@ strays = Array[String]([])
 characters = ""
 quest_name = ""
 quest_description = ""
+quest_type = SubResource("Resource_td011")

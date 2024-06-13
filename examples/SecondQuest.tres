@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3 uid="uid://c0k4crwaolqc1"]
+
+[ext_resource type="Script" path="res://addons/quest_system/objects/QuestData.gd" id="1_we7oj"]
+
+[resource]
+script = ExtResource("1_we7oj")
+starts = {}
+nodes = {}
+variables = {}
+strays = Array[String]([])
+characters = ""
+quest_name = ""
+quest_description = ""

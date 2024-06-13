@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GlobalQuestData" load_steps=5 format=3 uid="uid://c1twvuxv6njd8"]
+
+[ext_resource type="Script" path="res://addons/quest_system/objects/QuestTypeData.gd" id="1_ac87h"]
+[ext_resource type="Script" path="res://addons/quest_system/objects/GlobalQuestData.gd" id="1_c21lx"]
+
+[sub_resource type="Resource" id="Resource_td011"]
+script = ExtResource("1_ac87h")
+name = "Main"
+color = Color(1, 1, 0, 1)
+
+[sub_resource type="Resource" id="Resource_smw5e"]
+script = ExtResource("1_ac87h")
+name = "Side "
+color = Color(0.0235294, 1, 1, 1)
+
+[resource]
+script = ExtResource("1_c21lx")
+quest_type_list = Array[ExtResource("1_ac87h")]([SubResource("Resource_td011"), SubResource("Resource_smw5e")])

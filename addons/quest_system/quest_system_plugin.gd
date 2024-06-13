@@ -66,11 +66,11 @@ func _get_plugin_icon():
 
 
 func _handles(object):
-	return object is DialogueData
+	return object is QuestData
 
 
 func _edit(object):
-	if object is DialogueData and is_instance_valid(editor):
+	if object is QuestData and is_instance_valid(editor):
 		editor.files.open_file(object.resource_path)
 
 

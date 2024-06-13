@@ -1,6 +1,6 @@
 extends Control
 
-@export var demos: Array[DialogueData]
+@export var demos: Array[QuestData]
 
 @onready var dialogue_box = $DialogueBox
 @onready var particles = $Particles

@@ -145,6 +145,12 @@ size_flags_horizontal = 8
 icon = ExtResource("5_41leg")
 
 [node name="FileDialog" type="FileDialog" parent="Main/ToolBar/QuestTypeList"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(600, 400)
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.tres; Gobal quest data resource")
 
 [node name="Workspace" type="HSplitContainer" parent="Main"]
 layout_mode = 2
@@ -232,6 +238,7 @@ scroll_fit_content_height = true
 [node name="QuestType" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data"]
 layout_mode = 2
 script = ExtResource("5_bs3ik")
+editor_path = NodePath("../../../../..")
 
 [node name="QuestTypeTitle" type="Label" parent="Main/Workspace/SidePanel/Data/QuestType"]
 layout_mode = 2
@@ -241,6 +248,7 @@ text = "Type"
 layout_mode = 2
 
 [node name="Characters" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data"]
+visible = false
 layout_mode = 2
 script = ExtResource("3_285lm")
 editor_path = NodePath("../../../../..")

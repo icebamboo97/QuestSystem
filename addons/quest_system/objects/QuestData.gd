@@ -1,6 +1,6 @@
 ## Data for processing dialogue through a [param DialogueParser].
 @icon('res://addons/quest_system/icons/Quest.svg')
-class_name DialogueData
+class_name QuestData
 extends Resource
 
 ## Contains the start IDs as keys and their respective node name as values.
@@ -20,3 +20,5 @@ extends Resource
 @export var quest_name : String = ''
 ## Quest Description
 @export var quest_description : String = ''
+## Quest Type
+@export var quest_type : QuestTypeData = null

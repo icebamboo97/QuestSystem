@@ -36,6 +36,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Required field.
 The ID is used to identify each tree in a dialogue tree."
+text = "START"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

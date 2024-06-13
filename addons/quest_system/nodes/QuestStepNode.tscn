@@ -64,9 +64,18 @@ slot/4/right_type = 0
 slot/4/right_color = Color(1, 1, 1, 1)
 slot/4/right_icon = null
 slot/4/draw_stylebox = true
+slot/5/left_enabled = false
+slot/5/left_type = 0
+slot/5/left_color = Color(1, 1, 1, 1)
+slot/5/left_icon = null
+slot/5/right_enabled = true
+slot/5/right_type = 0
+slot/5/right_color = Color(1, 1, 1, 1)
+slot/5/right_icon = null
+slot/5/draw_stylebox = true
 script = ExtResource("1_g5fll")
 resize_timer = NodePath("DescriptionContainer/ResizeTimer")
-custom_speaker_timer = NodePath("TitleContainer/CustomSpeakerTimer")
+custom_speaker_timer = NodePath("TalkerContainer/CustomSpeakerTimer")
 dialogue_timer = NodePath("DescriptionContainer/DialogueTimer")
 
 [node name="TitleLabel" type="Label" parent="."]
@@ -76,25 +85,34 @@ text = "Title"
 [node name="TitleContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="CustomSpeaker" type="LineEdit" parent="TitleContainer"]
+[node name="TitleLine" type="LineEdit" parent="TitleContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Speaker" type="OptionButton" parent="TitleContainer"]
+[node name="TalkerContainer" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="CustomSpeaker" type="LineEdit" parent="TalkerContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Speaker" type="OptionButton" parent="TalkerContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
 
-[node name="CharacterToggle" type="Button" parent="TitleContainer"]
+[node name="CharacterToggle" type="Button" parent="TalkerContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
 icon = ExtResource("2_i4hav")
 
-[node name="CustomSpeakerTimer" type="Timer" parent="TitleContainer"]
+[node name="CustomSpeakerTimer" type="Timer" parent="TalkerContainer"]
 wait_time = 0.5
 one_shot = true
 
@@ -164,10 +182,10 @@ one_shot = true
 layout_mode = 2
 
 [connection signal="resize_request" from="." to="." method="_on_resize"]
-[connection signal="text_changed" from="TitleContainer/CustomSpeaker" to="." method="_on_custom_speaker_changed"]
-[connection signal="item_selected" from="TitleContainer/Speaker" to="." method="_on_speaker_selected"]
-[connection signal="toggled" from="TitleContainer/CharacterToggle" to="." method="_on_speaker_toggled"]
-[connection signal="timeout" from="TitleContainer/CustomSpeakerTimer" to="." method="_on_custom_speaker_timer_timeout"]
+[connection signal="text_changed" from="TalkerContainer/CustomSpeaker" to="." method="_on_custom_speaker_changed"]
+[connection signal="item_selected" from="TalkerContainer/Speaker" to="." method="_on_speaker_selected"]
+[connection signal="toggled" from="TalkerContainer/CharacterToggle" to="." method="_on_speaker_toggled"]
+[connection signal="timeout" from="TalkerContainer/CustomSpeakerTimer" to="." method="_on_custom_speaker_timer_timeout"]
 [connection signal="text_changed" from="DescriptionContainer/Dialogue" to="." method="_on_dialogue_text_changed"]
 [connection signal="pressed" from="DescriptionContainer/ExpandButton" to="." method="_on_expand_button_pressed"]
 [connection signal="text_changed" from="DescriptionContainer/DialoguePanel/VBoxContainer/DialogueExpanded" to="." method="_on_dialogue_text_changed"]

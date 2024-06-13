@@ -1,5 +1,5 @@
 @tool
-## A parser for reading and processing [param DialogueData] files
+## A parser for reading and processing [param QuestData] files
 @icon('res://addons/quest_system/icons/DialogueParser.svg')
 class_name DialogueParser
 extends Node
@@ -22,15 +22,15 @@ signal variable_changed(variable_name : String, value)
 ## Triggered when a dialogue tree has ended processing and reached the end of the dialogue.
 signal dialogue_ended
 
-## Contains the [param DialogueData] resource created using the Dialogue Nodes editor. Use [method load_data] to set its value.
-@export var data : DialogueData :
+## Contains the [param QuestData] resource created using the Dialogue Nodes editor. Use [method load_data] to set its value.
+@export var data : QuestData :
 	get:
 		return data
 	set(value):
 		data = value
 		
 		variables.clear()
-		if not data is DialogueData: return
+		if not data is QuestData: return
 		for var_name in data.variables:
 			variables[var_name] = data.variables[var_name].value
 		
@@ -40,7 +40,7 @@ signal dialogue_ended
 		if not character_list is CharacterList: return
 		characters = character_list.characters
 
-## Contains the variable data from the [param DialogueData] parsed in an easy to access dictionary.[br]
+## Contains the variable data from the [param QuestData] parsed in an easy to access dictionary.[br]
 ## Example: [code]{ "COINS": 10, "NAME": "Obama", "ALIVE": true }[/code]
 var variables : Dictionary
 ## Contains all the [param Character] resources loaded from the path in the [member data].
@@ -50,12 +50,12 @@ var _running := false
 var _option_links := []
 
 
-## Loads the [param DialogueData] resource from the given [param path]. The loaded resource can be accessed using [member data].
+## Loads the [param QuestData] resource from the given [param path]. The loaded resource can be accessed using [member data].
 func load_data(path : String):
 	if not path.ends_with('.tres'): return
 	
 	var new_data := ResourceLoader.load(path, '', ResourceLoader.CACHE_MODE_IGNORE)
-	if not new_data is DialogueData: return
+	if not new_data is QuestData: return
 	
 	data = new_data
 

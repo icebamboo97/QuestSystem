@@ -18,6 +18,8 @@ signal connection_shift_request(from_node : String, old_port : int, new_port : i
 @onready var dialogue = %Dialogue
 @onready var dialogue_panel = %DialoguePanel
 @onready var dialogue_expanded = %DialogueExpanded
+@onready var title_line: LineEdit = %TitleLine
+## TODO:完成title_line的功能
 
 var undo_redo : EditorUndoRedoManager
 var last_size := size

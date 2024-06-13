@@ -24,8 +24,8 @@ signal variable_changed(variable_name : String, value)
 signal dialogue_ended
 
 @export_group('Data')
-## Contains the [param DialogueData] resource created using the Dialogue Nodes editor.
-@export var data : DialogueData :
+## Contains the [param QuestData] resource created using the Dialogue Nodes editor.
+@export var data : QuestData :
 	get:
 		return data
 	set(value):
@@ -103,7 +103,7 @@ signal dialogue_ended
 ## Icon displayed when no text options are available.
 @export var next_icon := preload('res://addons/quest_system/icons/Play.svg')
 
-## Contains the variable data from the [param DialogueData] parsed in an easy to access dictionary.[br]
+## Contains the variable data from the [param QuestData] parsed in an easy to access dictionary.[br]
 ## Example: [code]{ "COINS": 10, "NAME": "Obama", "ALIVE": true }[/code]
 var variables : Dictionary
 ## Contains all the [param Character] resources loaded from the path in the [member data].

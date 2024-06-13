@@ -45,7 +45,7 @@ func _input(_event):
 
 
 func get_data():
-	var data := DialogueData.new()
+	var data := QuestData.new()
 	
 	# get start nodes and their trees
 	for start in starts:
@@ -63,7 +63,7 @@ func get_data():
 	return data
 
 
-func load_data(data : DialogueData):
+func load_data(data : QuestData):
 	# clear graph
 	clear_connections()
 	for node in get_children():

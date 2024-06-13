@@ -34,7 +34,7 @@ func _ready():
 	data_container.get_node('QuestName').modified.connect(_on_data_modified)
 	data_container.get_node('QuestDescription').modified.connect(_on_data_modified)
 
-func create_entry(file_name : String, path : String, data : DialogueData):
+func create_entry(file_name : String, path : String, data : QuestData):
 	var new_idx : int = item_count
 	
 	# check if the file is already loaded
@@ -105,12 +105,12 @@ func show_dir(idx : int):
 
 func new_file(path : String):
 	var file_name : String = path.split('/')[-1]
-	var data := DialogueData.new()
+	var data := QuestData.new()
 	
 	# create entry for file
 	create_entry(file_name, path, data)
 	
-	# save dialogue data to file
+	# save quest data to file
 	ResourceSaver.save(data, path)
 	
 	if editor._debug:
@@ -120,7 +120,7 @@ func new_file(path : String):
 func open_file(path : String):
 	var file_name : String = path.split('/')[-1]
 	var data := ResourceLoader.load(path, '', ResourceLoader.CACHE_MODE_IGNORE)
-	if not data is DialogueData:
+	if not data is QuestData:
 		printerr('File is not supported!')
 		return
 	
@@ -136,11 +136,11 @@ func save_file(idx := cur_idx):
 	
 	var metadata := get_item_metadata(idx)
 	
-	var data : DialogueData = metadata['graph'].get_data()
+	var data : QuestData = metadata['graph'].get_data()
 	if idx == cur_idx:
 		data.characters = data_container.get_node('Characters').get_data()
 		data.quest_name = data_container.get_node('QuestName').get_data()
-		data.quest_name = data_container.get_node('QuestDescription').get_data()
+		data.quest_description = data_container.get_node('QuestDescription').get_data()
 	else:
 		data.characters = metadata['characters']
 		data.quest_name = metadata['quest_name']
@@ -165,7 +165,7 @@ func save_as(path : String):
 	var file_name : String = path.split('/')[-1]
 	var metadata := get_item_metadata(cur_idx)
 	
-	var data : DialogueData = metadata['graph'].get_data()
+	var data : QuestData = metadata['graph'].get_data()
 	data.characters = data_container.get_node('Characters').get_data()
 	data.variables = metadata['variables'].get_data()
 	data.quest_name = data_container.get_node('QuestName').get_data()
@@ -174,7 +174,7 @@ func save_as(path : String):
 	# create entry for file
 	create_entry(file_name, path, data)
 	
-	# save dialogue data to file
+	# save quest data to file
 	ResourceSaver.save(data, path)
 	
 	if editor._debug:

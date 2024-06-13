@@ -29,7 +29,7 @@ func _from_dict(dict : Dictionary):
 
 
 ## convert graph/tree from this node to data
-func tree_to_data(graph : GraphEdit, data := DialogueData.new(), node : GraphNode = self):
+func tree_to_data(graph : GraphEdit, data := QuestData.new(), node : GraphNode = self):
 	var next_nodes : Array = graph.get_connections(node.name)
 	
 	# setup
@@ -57,7 +57,7 @@ func tree_to_data(graph : GraphEdit, data := DialogueData.new(), node : GraphNod
 
 
 ## create tree on this node from the given data
-func data_to_tree(graph : GraphEdit, data : DialogueData, node_name := name):
+func data_to_tree(graph : GraphEdit, data : QuestData, node_name := name):
 	var next_nodes := []
 	
 	# setup and end

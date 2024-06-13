@@ -24,8 +24,8 @@ signal dialogue_ended
 
 
 @export_group('Data')
-## Contains the [param DialogueData] resource created using the Dialogue Nodes editor.
-@export var data : DialogueData :
+## Contains the [param QuestData] resource created using the Dialogue Nodes editor.
+@export var data : QuestData :
 	get:
 		return data
 	set(value):
@@ -129,7 +129,7 @@ signal dialogue_ended
 ## Hide dialogue box at the end of a dialogue
 @export var hide_on_dialogue_end := true
 
-## Contains the variable data from the [param DialogueData] parsed in an easy to access dictionary.[br]
+## Contains the variable data from the [param QuestData] parsed in an easy to access dictionary.[br]
 ## Example: [code]{ "COINS": 10, "NAME": "Obama", "ALIVE": true }[/code]
 var variables : Dictionary
 ## Contains all the [param Character] resources loaded from the path in the [member data].

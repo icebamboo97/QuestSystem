@@ -17,6 +17,7 @@ var last_file_path : String
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	editor = get_node(editor_path)
+	_on_file_dialog_file_selected("res://addons/quest_system/GlobalQuestData.tres")
 
 func load_data(path : String):
 	if path != file_path.text:

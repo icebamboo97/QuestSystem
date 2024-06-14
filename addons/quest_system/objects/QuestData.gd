@@ -16,9 +16,30 @@ extends Resource
 @export var strays : Array[String] = []
 ## Path to the [param CharacterList] resource file.
 @export var characters := ''
-## Quest Name
+## Quest name
 @export var quest_name : String = ''
-## Quest Description
+## Quest description
 @export var quest_description : String = ''
-## Quest Type
+## Quest type
 @export var quest_type : QuestTypeData = null
+## Quest id
+@export var id : int
+
+signal started
+signal updated
+signal completed
+
+#var objective_completed: bool = false:
+	#set(value):
+		#objective_completed = value
+	#get:
+		#return objective_completed
+
+func update() -> void:
+	updated.emit()
+
+func start() -> void:
+	started.emit()
+
+func complete() -> void:
+	completed.emit()

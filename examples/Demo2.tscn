@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://addons/quest_system/objects/DialogueBox.gd" id="4_x7bn6"]
 [ext_resource type="AudioStream" uid="uid://bin1ei6yesmjv" path="res://examples/voice.ogg" id="7_au5ch"]
 [ext_resource type="Script" path="res://addons/quest_system/objects/bbcodeMatrix.gd" id="8_2keth"]
-[ext_resource type="Script" path="res://addons/quest_system/gameplay_nodes/QuestUpdate.gd" id="9_vg65h"]
+[ext_resource type="Script" path="res://addons/quest_system/runtime/QuestUpdate.gd" id="9_vg65h"]
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_c6wh6"]
 script = ExtResource("2_435yb")

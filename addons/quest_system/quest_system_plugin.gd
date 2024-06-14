@@ -8,8 +8,11 @@ const DialogueBubbleScene = preload('res://addons/quest_system/objects/DialogueB
 const DialogueBoxIcon = preload('res://addons/quest_system/icons/DialogueBox.svg')
 const DialogueBubbleIcon = preload('res://addons/quest_system/icons/DialogueBubble.svg')
 
+const QuestPropertyTranslationPlugin = preload("./QuestDataTranslationPlugin.gd")
+
 var editor
 
+var translation_plugin: QuestPropertyTranslationPlugin
 
 func _enter_tree():
 	editor = EditorScene.instantiate()
@@ -35,7 +38,14 @@ func _enter_tree():
 		DialogueBubbleIcon
 	)
 	
-	print_debug('Plugin Enabled')
+	#Runtime
+	add_autoload_singleton("QuestManager", "res://addons/quest_system/runtime/QuestManager.gd")
+	
+	if Engine.is_editor_hint():
+		translation_plugin = QuestPropertyTranslationPlugin.new()
+		add_translation_parser_plugin(translation_plugin)
+	
+	print_debug('Quest System Plugin Enabled')
 
 
 func _exit_tree():
@@ -45,7 +55,12 @@ func _exit_tree():
 	
 	remove_custom_type('DialogueBox')
 	
-	print_debug('Plugin Disabled')
+	#Runtime
+	remove_autoload_singleton("QuestManager")
+	remove_translation_parser_plugin(translation_plugin)
+	translation_plugin = null
+	
+	print_debug('Quest System Plugin Disabled')
 
 
 func _has_main_screen():

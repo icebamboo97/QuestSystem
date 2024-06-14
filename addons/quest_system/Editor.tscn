@@ -136,6 +136,7 @@ text = "Quests Data:"
 [node name="Path" type="TextEdit" parent="Main/ToolBar/QuestTypeList"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "res://addons/quest_system/GlobalQuestData.tres"
 placeholder_text = "File Path"
 scroll_fit_content_height = true
 
@@ -235,10 +236,12 @@ text = "Description"
 layout_mode = 2
 scroll_fit_content_height = true
 
-[node name="QuestType" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data"]
+[node name="QuestType" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data" node_paths=PackedStringArray("quest_type_option_button", "editor")]
 layout_mode = 2
 script = ExtResource("5_bs3ik")
 editor_path = NodePath("../../../../..")
+quest_type_option_button = NodePath("QuestTypeOptionButton")
+editor = NodePath("../../../../..")
 
 [node name="QuestTypeTitle" type="Label" parent="Main/Workspace/SidePanel/Data/QuestType"]
 layout_mode = 2
@@ -246,6 +249,11 @@ text = "Type"
 
 [node name="QuestTypeOptionButton" type="OptionButton" parent="Main/Workspace/SidePanel/Data/QuestType"]
 layout_mode = 2
+item_count = 2
+popup/item_0/text = "主线"
+popup/item_0/id = 0
+popup/item_1/text = "支线"
+popup/item_1/id = 1
 
 [node name="Characters" type="VBoxContainer" parent="Main/Workspace/SidePanel/Data"]
 visible = false

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b60fa8vcjuoo6"]
+[gd_scene load_steps=7 format=3 uid="uid://b60fa8vcjuoo6"]
 
 [ext_resource type="Script" path="res://addons/quest_system/nodes/questStepNode.gd" id="1_g5fll"]
 [ext_resource type="Texture2D" uid="uid://dla76qr5vqp1r" path="res://addons/quest_system/icons/Character.svg" id="2_i4hav"]
 [ext_resource type="Texture2D" uid="uid://dps8mwnnuc5nm" path="res://addons/quest_system/icons/DistractionFree.svg" id="3_42j5y"]
-[ext_resource type="PackedScene" uid="uid://blp6ulybtwgcj" path="res://addons/quest_system/nodes/DialogueNodeOption.tscn" id="4_rshl2"]
+[ext_resource type="PackedScene" uid="uid://blp6ulybtwgcj" path="res://addons/quest_system/nodes/QuestNodeOption.tscn" id="4_geita"]
+[ext_resource type="PackedScene" uid="uid://1x7ljp200t3" path="res://addons/quest_system/nodes/QuestObjective.tscn" id="4_hrigm"]
 
 [sub_resource type="CodeHighlighter" id="CodeHighlighter_btpy8"]
 number_color = Color(1, 1, 1, 1)
@@ -73,6 +74,15 @@ slot/5/right_type = 0
 slot/5/right_color = Color(1, 1, 1, 1)
 slot/5/right_icon = null
 slot/5/draw_stylebox = true
+slot/6/left_enabled = false
+slot/6/left_type = 0
+slot/6/left_color = Color(1, 1, 1, 1)
+slot/6/left_icon = null
+slot/6/right_enabled = true
+slot/6/right_type = 0
+slot/6/right_color = Color(1, 1, 1, 1)
+slot/6/right_icon = null
+slot/6/draw_stylebox = true
 script = ExtResource("1_g5fll")
 resize_timer = NodePath("DescriptionContainer/ResizeTimer")
 custom_speaker_timer = NodePath("TalkerContainer/CustomSpeakerTimer")
@@ -183,7 +193,10 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="Option1" parent="." instance=ExtResource("4_rshl2")]
+[node name="Objective1" parent="." instance=ExtResource("4_hrigm")]
+layout_mode = 2
+
+[node name="Option1" parent="." instance=ExtResource("4_geita")]
 layout_mode = 2
 
 [connection signal="resize_request" from="." to="." method="_on_resize"]

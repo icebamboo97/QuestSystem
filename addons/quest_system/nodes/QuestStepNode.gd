@@ -27,7 +27,7 @@ var last_custom_speaker := ''
 var last_title_line := ''
 var cur_speaker := -1
 var last_dialogue := ''
-var OptionScene := preload("res://addons/quest_system/nodes/DialogueNodeOption.tscn")
+var OptionScene := preload("res://addons/quest_system/nodes/QuestNodeOption.tscn")
 var options : Array = []
 var empty_option : BoxContainer
 var first_option_index := -1

@@ -29,7 +29,7 @@ nodes = {
 "text": ""
 }
 },
-"size": Vector2(300, 240),
+"size": Vector2(300, 242),
 "speaker": "",
 "title": "第一步"
 },
@@ -43,7 +43,7 @@ nodes = {
 "text": ""
 }
 },
-"size": Vector2(300, 240),
+"size": Vector2(300, 242),
 "speaker": "",
 "title": "第二步"
 }
@@ -54,3 +54,4 @@ characters = ""
 quest_name = "第一个任务"
 quest_description = "第一个任务描述"
 quest_type = SubResource("Resource_td011")
+id = 0

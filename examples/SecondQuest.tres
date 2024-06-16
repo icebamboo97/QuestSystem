@@ -29,7 +29,7 @@ nodes = {
 "text": ""
 }
 },
-"size": Vector2(300, 240),
+"size": Vector2(300, 242),
 "speaker": "",
 "title": "hello"
 }
@@ -40,3 +40,4 @@ characters = ""
 quest_name = "第二个支线任务"
 quest_description = "第二个任务描述"
 quest_type = SubResource("Resource_smw5e")
+id = 0

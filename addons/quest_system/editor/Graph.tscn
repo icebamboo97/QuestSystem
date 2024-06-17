@@ -17,6 +17,7 @@ zoom_max = 2.0
 script = ExtResource("1_7isyk")
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
+size = Vector2i(150, 170)
 item_count = 6
 item_0/text = "StartNode"
 item_0/id = 0

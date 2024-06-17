@@ -16,10 +16,10 @@ signal connection_shift_request(from_node : String, old_port : int, new_port : i
 @onready var speaker = %Speaker
 @onready var custom_speaker = %CustomSpeaker
 @onready var character_toggle = %CharacterToggle
-@onready var dialogue = %Dialogue
+@onready var description = %Dialogue
 @onready var dialogue_panel = %DialoguePanel
 @onready var dialogue_expanded = %DialogueExpanded
-@onready var title_line: LineEdit = %TitleLine
+@onready var step_name: LineEdit = %TitleLine
 
 var undo_redo : EditorUndoRedoManager
 var last_size := size
@@ -57,8 +57,8 @@ func _to_dict(graph : GraphEdit):
 			speaker_idx = cur_speaker
 		dict['speaker'] = speaker_idx
 	
-	dict['title'] = title_line.text
-	dict['dialogue'] = dialogue.text
+	dict['step_name'] = step_name.text
+	dict['description'] = description.text
 	dict['size'] = size
 	
 	# get options connected to other nodes
@@ -103,11 +103,11 @@ func _from_dict(dict : Dictionary):
 		cur_speaker = dict['speaker']
 		character_toggle.set_pressed_no_signal(true)
 		toggle_speaker_input(true)
-	title_line.text = dict['title']
-	last_title_line = title_line.text
-	dialogue.text = dict['dialogue']
-	dialogue_expanded.text = dialogue.text
-	last_dialogue = dialogue.text
+	step_name.text = dict['step_name']
+	last_title_line = step_name.text
+	description.text = dict['description']
+	dialogue_expanded.text = description.text
+	last_dialogue = description.text
 	
 	# remove any existing options (if any)
 	for option in options:
@@ -136,7 +136,7 @@ func _from_dict(dict : Dictionary):
 		var new_size: Vector2
 		if dict['size'] is Vector2:
 			new_size = dict['size']
-		else: # for dialogue files created before v1.0.2
+		else: # for description files created before v1.0.2
 			new_size = Vector2( float(dict['size']['x']), float(dict['size']['y']) )
 		size = new_size
 		last_size = size
@@ -144,9 +144,9 @@ func _from_dict(dict : Dictionary):
 	return next_nodes
 
 func set_title_line(new_title_line : String):
-	if title_line.text != new_title_line:
-		title_line.text = new_title_line
-	last_title_line = title_line.text
+	if step_name.text != new_title_line:
+		step_name.text = new_title_line
+	last_title_line = step_name.text
 
 func set_custom_speaker(new_custom_speaker : String):
 	if custom_speaker.text != new_custom_speaker:
@@ -160,11 +160,11 @@ func toggle_speaker_input(use_speaker_list : bool):
 
 
 func set_dialogue_text(new_text : String):
-	if dialogue.text != new_text:
-		dialogue.text = new_text
+	if description.text != new_text:
+		description.text = new_text
 	if dialogue_expanded.text != new_text:
-		dialogue_expanded.text = dialogue.text
-	last_dialogue = dialogue.text
+		dialogue_expanded.text = description.text
+	last_dialogue = description.text
 
 
 func add_option(option : BoxContainer, to_idx := -1):
@@ -294,9 +294,9 @@ func _on_title_line_text_changed(new_text):
 func _on_title_timer_timeout():
 	if not undo_redo: return
 	
-	undo_redo.create_action('Set title text')
+	undo_redo.create_action('Set step_name text')
 	
-	undo_redo.add_do_method(self, 'set_title_line', title_line.text)
+	undo_redo.add_do_method(self, 'set_title_line', step_name.text)
 	undo_redo.add_do_method(self, '_on_modified')
 	undo_redo.add_undo_method(self, '_on_modified')
 	undo_redo.add_undo_method(self, 'set_title_line', last_title_line)
@@ -310,11 +310,11 @@ func _on_dialogue_text_changed():
 func _on_dialogue_timer_timeout():
 	if not undo_redo: return
 	
-	undo_redo.create_action('Set dialogue text')
+	undo_redo.create_action('Set description text')
 	if dialogue_panel.visible:
 		undo_redo.add_do_method(self, 'set_dialogue_text', dialogue_expanded.text)
 	else:
-		undo_redo.add_do_method(self, 'set_dialogue_text', dialogue.text)
+		undo_redo.add_do_method(self, 'set_dialogue_text', description.text)
 	undo_redo.add_do_method(self, '_on_modified')
 	undo_redo.add_undo_method(self, '_on_modified')
 	undo_redo.add_undo_method(dialogue_expanded, 'release_focus')

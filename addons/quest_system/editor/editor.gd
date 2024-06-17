@@ -11,7 +11,8 @@ extends Control
 @onready var characters = $Main/Workspace/SidePanel/Data/Characters
 @onready var panel_toggle = $Main/Statusbar/PanelToggle
 @onready var version_number = $Main/Statusbar/VersionNumber
-@onready var dialogue_background = $DialogueBackground
+@onready var quest_background: Panel = $QuestBackground
+
 @onready var dialogue_box = $DialogueBox
 
 var undo_redo : EditorUndoRedoManager
@@ -26,11 +27,11 @@ func _ready():
 	run_menu.get_popup().id_pressed.connect(run_tree)
 	debug_menu.get_popup().id_pressed.connect(_on_debug_menu_pressed)
 	
-	dialogue_box.dialogue_started.connect(_on_dialogue_started)
-	dialogue_box.option_selected.connect(_on_dialogue_option_selected)
-	dialogue_box.dialogue_signal.connect(_on_dialogue_signal)
-	dialogue_box.variable_changed.connect(_on_dialogue_variable_changed)
-	dialogue_box.dialogue_ended.connect(_on_dialogue_ended)
+	dialogue_box.dialogue_started.connect(_on_quest_started)
+	dialogue_box.option_selected.connect(_on_quest_option_selected)
+	dialogue_box.dialogue_signal.connect(_on_quest_signal)
+	dialogue_box.variable_changed.connect(_on_quest_variable_changed)
+	dialogue_box.dialogue_ended.connect(_on_quest_ended)
 
 	
 	var config = ConfigFile.new()
@@ -49,7 +50,7 @@ func run_tree(start_node_idx : int):
 	
 	dialogue_box.data = data
 	dialogue_box.start(start_node.start_id)
-	dialogue_background.show()
+	quest_background.show()
 
 
 func _on_debug_menu_pressed(idx : int):
@@ -115,7 +116,7 @@ func _on_version_number_pressed():
 	DisplayServer.clipboard_set('v'+version_number.text)
 
 
-func _on_dialogue_background_input(event : InputEvent):
+func _on_quest_background_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		dialogue_box.stop()
 		
@@ -123,17 +124,17 @@ func _on_dialogue_background_input(event : InputEvent):
 			print('Dialogue canceled')
 
 
-func _on_dialogue_started(id : String):
+func _on_quest_started(id : String):
 	if _debug:
 		print_debug('Dialogue started: ', id)
 
 
-func _on_dialogue_option_selected(idx : int):
+func _on_quest_option_selected(idx : int):
 	if _debug:
 		print('Option selected. idx: ', idx, ', text: "', dialogue_box.options_container.get_child(idx).text, '"')
 
 
-func _on_dialogue_variable_changed(var_name : String, value):
+func _on_quest_variable_changed(var_name : String, value):
 	variables.set_value(var_name, value)
 	files.set_modified(files.cur_idx, true)
 	
@@ -141,13 +142,14 @@ func _on_dialogue_variable_changed(var_name : String, value):
 		print('Variable changed:', var_name, ', value:', value)
 
 
-func _on_dialogue_signal(value : String):
+func _on_quest_signal(value : String):
 	if _debug:
 		print('Dialogue emitted signal with value:', value)
 
 
-func _on_dialogue_ended():
-	dialogue_background.hide()
+func _on_quest_ended():
+	quest_background.hide()
 
 	if _debug:
 		print('Dialogue ended')
+

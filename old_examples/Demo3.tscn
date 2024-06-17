@@ -1,13 +1,13 @@
 [gd_scene load_steps=24 format=3 uid="uid://dhwoh3ay4mp3c"]
 
-[ext_resource type="Script" path="res://examples/demo3.gd" id="1_2a8yf"]
-[ext_resource type="AudioStream" uid="uid://bin1ei6yesmjv" path="res://examples/voice.ogg" id="2_bjs48"]
+[ext_resource type="Script" path="res://old_examples/demo3.gd" id="1_2a8yf"]
+[ext_resource type="AudioStream" uid="uid://bin1ei6yesmjv" path="res://old_examples/voice.ogg" id="2_bjs48"]
 [ext_resource type="Theme" uid="uid://b4f152moh4ayu" path="res://addons/quest_system/themes/bubblyClean.theme" id="3_xmmjy"]
 [ext_resource type="Script" path="res://addons/quest_system/objects/bbcodeWait.gd" id="4_tmfyu"]
 [ext_resource type="Script" path="res://addons/quest_system/objects/bbcodeGhost.gd" id="5_vs72k"]
 [ext_resource type="Script" path="res://addons/quest_system/objects/bbcodeMatrix.gd" id="6_pkic0"]
 [ext_resource type="Script" path="res://addons/quest_system/objects/DialogueBubble.gd" id="7_wf6dy"]
-[ext_resource type="Resource" uid="uid://cwtdfv6yke8ri" path="res://examples/ExampleBubble.tres" id="8_qbppo"]
+[ext_resource type="Resource" uid="uid://cwtdfv6yke8ri" path="res://old_examples/ExampleBubble.tres" id="8_qbppo"]
 [ext_resource type="Texture2D" uid="uid://bucad3kf5mxvp" path="res://addons/quest_system/icons/Play.svg" id="9_w41gt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xk202"]

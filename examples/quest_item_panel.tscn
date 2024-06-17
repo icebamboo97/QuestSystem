@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://cinheoy8cvsb4"]
+
+[ext_resource type="Script" path="res://examples/quest_item_panel.gd" id="1_tv6cw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nrv8u"]
+font_size = 20
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="QuestItemPanel" type="Panel"]
+custom_minimum_size = Vector2(400, 80)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -755.0
+offset_bottom = -568.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tv6cw")
+
+[node name="TitlePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 29.0
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.255684, 0.420602, 0.310117, 1)
+
+[node name="TitleLabel" type="Label" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "任务名"
+label_settings = SubResource("LabelSettings_nrv8u")
+
+[node name="DescriptionPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DescriptionLable" type="RichTextLabel" parent="DescriptionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "任务描述，任务描述，任务描述，任务描述，任务描述。
+任务描述，任务描述，任务描述，任务描述，任务描述。"

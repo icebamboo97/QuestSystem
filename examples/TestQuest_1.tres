@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=4 format=3 uid="uid://cagccns5bfxpc"]
+
+[ext_resource type="Script" path="res://addons/quest_system/objects/QuestData.gd" id="1_25v6t"]
+[ext_resource type="Script" path="res://addons/quest_system/objects/QuestTypeData.gd" id="1_r10y0"]
+
+[sub_resource type="Resource" id="Resource_td011"]
+script = ExtResource("1_r10y0")
+name = "主线"
+color = Color(1, 1, 0, 1)
+
+[resource]
+script = ExtResource("1_25v6t")
+starts = {
+"START": &"0_1"
+}
+nodes = {
+"0_1": {
+"link": &"1_1",
+"offset": Vector2(457.315, 446.431),
+"start_id": "START"
+},
+"1_1": {
+"description": "222222222",
+"offset": Vector2(740, 440),
+"options": {
+0: {
+"condition": {},
+"link": &"1_2",
+"text": "3"
+},
+1: {
+"condition": {},
+"link": &"1_3",
+"text": "4"
+}
+},
+"size": Vector2(300, 407),
+"speaker": "",
+"step_name": "22"
+},
+"1_2": {
+"description": "3333333",
+"offset": Vector2(1360, 460),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": ""
+}
+},
+"size": Vector2(300, 311),
+"speaker": "",
+"step_name": "33"
+},
+"1_3": {
+"description": "44444444",
+"offset": Vector2(1360, 840),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": ""
+}
+},
+"size": Vector2(300, 311),
+"speaker": "",
+"step_name": "444"
+}
+}
+variables = {}
+strays = Array[String]([])
+characters = ""
+quest_name = "test1111"
+quest_description = "11111111111111"
+quest_type = SubResource("Resource_td011")
+id = 0

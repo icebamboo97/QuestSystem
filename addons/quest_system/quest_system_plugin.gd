@@ -10,11 +10,16 @@ const DialogueBubbleIcon = preload('res://addons/quest_system/icons/DialogueBubb
 
 const QuestPropertyTranslationPlugin = preload("./QuestDataTranslationPlugin.gd")
 
+const QuestSystemSettings = preload("res://addons/quest_system/settings.gd")
+
 var editor
 
 var translation_plugin: QuestPropertyTranslationPlugin
 
 func _enter_tree():
+	QuestSystemSettings.initialize(_get_plugin_path())
+	#QuestSystemSettings.get_config_setting("check_for_updates_on_startup", true):
+	
 	editor = EditorScene.instantiate()
 	
 	# add editor to main viewport
@@ -78,6 +83,10 @@ func _get_plugin_name():
 
 func _get_plugin_icon():
 	return preload('res://addons/quest_system/icons/Quest.svg')
+
+
+func _get_plugin_path() -> String:
+	return get_script().resource_path.get_base_dir()
 
 
 func _handles(object):

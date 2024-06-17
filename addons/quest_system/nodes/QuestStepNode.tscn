@@ -91,7 +91,7 @@ title_timer = NodePath("TitleContainer/TitleTimer")
 
 [node name="TitleLabel" type="Label" parent="."]
 layout_mode = 2
-text = "Title"
+text = "Step Name"
 
 [node name="TitleContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -194,6 +194,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Objective1" parent="." instance=ExtResource("4_hrigm")]
+visible = false
 layout_mode = 2
 
 [node name="Option1" parent="." instance=ExtResource("4_geita")]

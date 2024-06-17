@@ -30,10 +30,10 @@ signal dialogue_ended
 		return data
 	set(value):
 		data = value
-		if _dialogue_parser:
-			_dialogue_parser.data = value
-			variables = _dialogue_parser.variables
-			characters = _dialogue_parser.characters
+		if _quest_parser:
+			_quest_parser.data = value
+			variables = _quest_parser.variables
+			#characters = _quest_parser.characters
 ## The default start ID to begin dialogue from. This is the value you set in the Dialogue Nodes editor.
 @export var start_id : String
 
@@ -133,7 +133,7 @@ signal dialogue_ended
 ## Example: [code]{ "COINS": 10, "NAME": "Obama", "ALIVE": true }[/code]
 var variables : Dictionary
 ## Contains all the [param Character] resources loaded from the path in the [member data].
-var characters : Array[Character]
+#var characters : Array[Character]
 ## Displays the portrait image of the speaker in the [DialogueBox]. Access the speaker's texture by [member DialogueBox.portrait.texture]. This value is automatically set while running a dialogue tree.
 var portrait : TextureRect
 ## Displays the name of the speaker in the [DialogueBox]. Access the speaker name by [code]DialogueBox.speaker_label.text[/code]. This value is automatically set while running a dialogue tree.
@@ -145,7 +145,7 @@ var options_container : BoxContainer
 
 # [param QuestParser] used for parsing the dialogue [member data].
 # NOTE: Using [param QuestParser] as a child instead of extending from it, because [DialogueBox] needs to extend from [Panel].
-var _dialogue_parser : QuestParser
+var _quest_parser : QuestParser
 var _main_container : BoxContainer
 var _sub_container : BoxContainer
 var _wait_effect : RichTextWait
@@ -196,18 +196,18 @@ func _enter_tree():
 	options_container.alignment = BoxContainer.ALIGNMENT_END
 	max_options_count = max_options_count
 	
-	_dialogue_parser = QuestParser.new()
-	add_child(_dialogue_parser)
-	_dialogue_parser.data = data
-	variables = _dialogue_parser.variables
-	characters = _dialogue_parser.characters
+	_quest_parser = QuestParser.new()
+	add_child(_quest_parser)
+	_quest_parser.data = data
+	variables = _quest_parser.variables
+	#characters = _quest_parser.characters
 	
-	_dialogue_parser.dialogue_started.connect(_on_dialogue_started)
-	_dialogue_parser.dialogue_processed.connect(_on_dialogue_processed)
-	_dialogue_parser.option_selected.connect(_on_option_selected)
-	_dialogue_parser.dialogue_signal.connect(_on_dialogue_signal)
-	_dialogue_parser.variable_changed.connect(_on_variable_changed)
-	_dialogue_parser.dialogue_ended.connect(_on_dialogue_ended)
+	_quest_parser.quest_started.connect(_on_dialogue_started)
+	_quest_parser.quest_processed.connect(_on_dialogue_processed)
+	_quest_parser.option_selected.connect(_on_option_selected)
+	_quest_parser.quest_signal.connect(_on_dialogue_signal)
+	_quest_parser.variable_changed.connect(_on_variable_changed)
+	_quest_parser.quest_ended.connect(_on_dialogue_ended)
 
 
 func _ready():
@@ -248,25 +248,25 @@ func _input(event):
 
 ## Starts processing the dialogue [member data], starting with the Start Node with its ID set to [param start_id].
 func start(id := start_id):
-	if not _dialogue_parser: return
-	_dialogue_parser.start(id)
+	if not _quest_parser: return
+	_quest_parser.start(id)
 
 
 ## Stops processing the dialogue tree.
 func stop():
-	if not _dialogue_parser: return
-	_dialogue_parser.stop()
+	if not _quest_parser: return
+	_quest_parser.stop()
 
 
 ## Continues processing the dialogue tree from the node connected to the option at [param idx].
 func select_option(idx : int):
-	if not _dialogue_parser: return
-	_dialogue_parser.select_option(idx)
+	if not _quest_parser: return
+	_quest_parser.select_option(idx)
 
 
 ## Returns [code]true[/code] if the [DialogueBox] is processing a dialogue tree.
 func is_running():
-	return _dialogue_parser.is_running()
+	return _quest_parser.is_running()
 
 
 func _on_dialogue_started(id : String):
@@ -293,7 +293,7 @@ func _on_dialogue_processed(speaker : Variant, dialogue : String, options : Arra
 		portrait.hide()
 	
 	# set dialogue
-	dialogue_label.text = _dialogue_parser._update_wait_tags(dialogue_label, dialogue)
+	dialogue_label.text = _quest_parser._update_wait_tags(dialogue_label, dialogue)
 	dialogue_label.get_v_scroll_bar().set_value_no_signal(0)
 	for effect in custom_effects:
 		if effect is RichTextWait:

@@ -18,6 +18,11 @@ config/icon="res://icon_project.svg"
 
 QuestManager="*res://addons/quest_system/runtime/QuestManager.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/quest_system/plugin.cfg")

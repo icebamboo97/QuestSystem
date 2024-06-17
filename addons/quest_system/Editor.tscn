@@ -312,7 +312,7 @@ theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
 text = "1.0.0"
 underline = 1
 
-[node name="DialogueBackground" type="Panel" parent="."]
+[node name="QuestBackground" type="Panel" parent="."]
 visible = false
 modulate = Color(0, 0, 0, 0.501961)
 layout_mode = 1
@@ -364,4 +364,4 @@ custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_ogokn"), Sub
 [connection signal="file_selected" from="Main/Workspace/SidePanel/Data/Characters/OpenDialog" to="Main/Workspace/SidePanel/Data/Characters" method="_on_file_selected"]
 [connection signal="pressed" from="Main/Statusbar/PanelToggle" to="." method="_on_files_toggle_button_pressed"]
 [connection signal="pressed" from="Main/Statusbar/VersionNumber" to="." method="_on_version_number_pressed"]
-[connection signal="gui_input" from="DialogueBackground" to="." method="_on_dialogue_background_input"]
+[connection signal="gui_input" from="QuestBackground" to="." method="_on_quest_background_gui_input"]

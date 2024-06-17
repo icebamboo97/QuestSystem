@@ -1,0 +1,142 @@
+[gd_scene load_steps=6 format=3 uid="uid://hybq2hnfha0u"]
+
+[ext_resource type="Script" path="res://examples/demo_quest.gd" id="1_ehvm3"]
+[ext_resource type="Resource" uid="uid://cagccns5bfxpc" path="res://examples/TestQuest_1.tres" id="2_51u3s"]
+[ext_resource type="Resource" uid="uid://dxgsb16skf0v4" path="res://examples/TestQuest_2.tres" id="3_ly20p"]
+[ext_resource type="Resource" uid="uid://cdhr8almvispe" path="res://examples/TestQuest_3.tres" id="4_yhtf8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_673dw"]
+font_size = 22
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="DemoQuest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ehvm3")
+demo_quests = Array[Resource("res://addons/quest_system/objects/QuestData.gd")]([ExtResource("2_51u3s"), ExtResource("3_ly20p"), ExtResource("4_yhtf8")])
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = -500
+
+[node name="Panel" type="Panel" parent="HSplitContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HSplitContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HSplitContainer/Panel/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="HSplitContainer/Panel/VBoxContainer2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.381372, 0.376621, 0.363724, 1)
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel/VBoxContainer2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "未激活"
+label_settings = SubResource("LabelSettings_673dw")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/Panel/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AvailableQuestPool" type="VBoxContainer" parent="HSplitContainer/Panel/VBoxContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel2" type="Panel" parent="HSplitContainer/Panel/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="HSplitContainer/Panel/VBoxContainer2/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.644229, 0.202872, 0.152255, 1)
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel/VBoxContainer2/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "进行中"
+label_settings = SubResource("LabelSettings_673dw")
+
+[node name="ScrollContainer3" type="ScrollContainer" parent="HSplitContainer/Panel/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ActiveQuestPool" type="VBoxContainer" parent="HSplitContainer/Panel/VBoxContainer2/ScrollContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel3" type="Panel" parent="HSplitContainer/Panel/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="HSplitContainer/Panel/VBoxContainer2/Panel3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.188865, 0.408191, 0.493071, 1)
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel/VBoxContainer2/Panel3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "已完成"
+label_settings = SubResource("LabelSettings_673dw")
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="HSplitContainer/Panel/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CompletedQuestPool" type="VBoxContainer" parent="HSplitContainer/Panel/VBoxContainer2/ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel2" type="Panel" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

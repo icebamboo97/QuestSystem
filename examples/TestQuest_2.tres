@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=4 format=3 uid="uid://dxgsb16skf0v4"]
+
+[ext_resource type="Script" path="res://addons/quest_system/objects/QuestTypeData.gd" id="1_ohan7"]
+[ext_resource type="Script" path="res://addons/quest_system/objects/QuestData.gd" id="2_2dhgm"]
+
+[sub_resource type="Resource" id="Resource_smw5e"]
+script = ExtResource("1_ohan7")
+name = "支线"
+color = Color(0.0235294, 1, 1, 1)
+
+[resource]
+script = ExtResource("2_2dhgm")
+starts = {
+"START": &"0_1"
+}
+nodes = {
+"0_1": {
+"link": &"1_1",
+"offset": Vector2(457.315, 446.431),
+"start_id": "START"
+},
+"1_1": {
+"description": "222222222",
+"offset": Vector2(740, 440),
+"options": {
+0: {
+"condition": {},
+"link": &"1_2",
+"text": ""
+}
+},
+"size": Vector2(300, 311),
+"speaker": "",
+"step_name": "22"
+},
+"1_2": {
+"description": "34533434",
+"offset": Vector2(1247, 731),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": ""
+}
+},
+"size": Vector2(300, 311),
+"speaker": "",
+"step_name": "67"
+}
+}
+variables = {}
+strays = Array[String]([])
+characters = ""
+quest_name = "test222"
+quest_description = "222"
+quest_type = SubResource("Resource_smw5e")
+id = 0

@@ -5,24 +5,24 @@ class_name QuestParser
 extends Node
 # TODO : Fix [wait] bbcode
 
-## Triggered when a dialogue has started. Passes [param id] of the dialogue tree as defined in the StartNode.
-signal dialogue_started(id : String)
-## Triggered when a single dialogue block has been processed.
-## Passes [param speaker] which can be a [String] or a [param Character] resource, a [param dialogue] containing the text to be displayed
+## Triggered when a quest has started. Passes [param id] of the quest tree as defined in the StartNode.
+signal quest_started(id : String)
+## Triggered when a single quest block has been processed.
+## Passes [param step_name] which can be a [String], a [param description] containing the text to be displayed
 ## and an [param options] list containing the texts for each option.
-signal dialogue_processed(speaker : Variant, dialogue : String, options : Array[String])
+signal quest_processed(step_name : Variant, description : String, options : Array[String])
 ## Triggered when an option is selected
 signal option_selected(idx : int)
-## Triggered when a SignalNode is encountered while processing the dialogue.
+## Triggered when a SignalNode is encountered while processing the quest.
 ## Passes a [param value] defined in the SignalNode in the tree.
-signal dialogue_signal(value : String)
+signal quest_signal(value : String)
 ## Triggered when a variable value is changed.
 ## Passes the [param variable_name] along with it's [param value]
 signal variable_changed(variable_name : String, value)
-## Triggered when a dialogue tree has ended processing and reached the end of the dialogue.
-signal dialogue_ended
+## Triggered when a quest tree has ended processing and reached the end of the quest.
+signal quest_ended
 
-## Contains the [param QuestData] resource created using the Dialogue Nodes editor. Use [method load_data] to set its value.
+## Contains the [param QuestData] resource created using the Quest Nodes editor. Use [method load_data] to set its value.
 @export var data : QuestData :
 	get:
 		return data
@@ -34,17 +34,17 @@ signal dialogue_ended
 		for var_name in data.variables:
 			variables[var_name] = data.variables[var_name].value
 		
-		characters.clear()
-		if not data.characters.ends_with('.tres'): return
-		var character_list = ResourceLoader.load(data.characters, '', ResourceLoader.CACHE_MODE_IGNORE)
-		if not character_list is CharacterList: return
-		characters = character_list.characters
+		# characters.clear()
+		# if not data.characters.ends_with('.tres'): return
+		# var character_list = ResourceLoader.load(data.characters, '', ResourceLoader.CACHE_MODE_IGNORE)
+		# if not character_list is CharacterList: return
+		# characters = character_list.characters
 
 ## Contains the variable data from the [param QuestData] parsed in an easy to access dictionary.[br]
 ## Example: [code]{ "COINS": 10, "NAME": "Obama", "ALIVE": true }[/code]
 var variables : Dictionary
 ## Contains all the [param Character] resources loaded from the path in the [member data].
-var characters : Array[Character]
+#var characters : Array[Character]
 
 var _running := false
 var _option_links := []
@@ -60,27 +60,27 @@ func load_data(path : String):
 	data = new_data
 
 
-## Starts processing the dialogue data set in [member data], starting with the Start Node with its ID set to [param start_id].
+## Starts processing the quest data set in [member data], starting with the Start Node with its ID set to [param start_id].
 func start(start_id : String):
 	if not data:
-		printerr('No dialogue data loaded!')
+		printerr('No quest data loaded!')
 		return
-	if not data.starts.has(start_id):
-		printerr('Start ID ', start_id, ' not found in dialogue data!')
-		return
+	# if not data.starts.has(start_id):
+	# 	printerr('Start ID ', start_id, ' not found in quest data!')
+	# 	return
 	
 	_running = true
-	dialogue_started.emit(start_id)
-	_proceed(data.starts[start_id])
+	quest_started.emit(start_id)
+	_proceed(data.starts.values()[0])
 
 
-## Stops processing the dialogue tree.
+## Stops processing the quest tree.
 func stop():
 	_running = false
-	dialogue_ended.emit()
+	quest_ended.emit()
 
 
-## Continues processing the dialogue tree from the node connected to the option at [param idx].
+## Continues processing the quest tree from the node connected to the option at [param idx].
 func select_option(idx : int):
 	if not _running: return
 	
@@ -92,7 +92,7 @@ func select_option(idx : int):
 	_proceed(_option_links[idx])
 
 
-## Returns [code]true[/code] if the [QuestParser] is processing a dialogue tree.
+## Returns [code]true[/code] if the [QuestParser] is processing a quest tree.
 func is_running(): return _running
 
 
@@ -104,7 +104,7 @@ func _proceed(node_name : String):
 	
 	var process_functions := [
 		_process_start,
-		_process_dialogue,
+		_process_step,
 		func(): pass, # comment
 		_process_signal,
 		_process_set,
@@ -121,16 +121,16 @@ func _process_start(dict : Dictionary):
 	_proceed(dict.link)
 
 
-# Processes the dialogue node data (dict).
-func _process_dialogue(dict : Dictionary):
-	var speaker = ''
+# Processes the step node data (dict).
+func _process_step(dict : Dictionary):
+	var step_name = ''
 	
-	if dict.speaker is String:
-		speaker = dict.speaker
-	elif dict.speaker is int and characters.size() > 0 and dict.speaker < characters.size():
-		speaker = characters[dict.speaker]
+	if dict.step_name is String:
+		step_name = dict.step_name
+	#elif dict.speaker is int and characters.size() > 0 and dict.speaker < characters.size():
+		#speaker = characters[dict.speaker]
 	
-	var dialogue_text = _parse_variables(dict.dialogue)
+	var description_text = _parse_variables(dict.description)
 	
 	var option_texts : Array[String] = []
 	_option_links.clear()
@@ -139,12 +139,12 @@ func _process_dialogue(dict : Dictionary):
 			option_texts.append(_parse_variables(option.text))
 			_option_links.append(option.link)
 	
-	dialogue_processed.emit(speaker, dialogue_text, option_texts)
+	quest_processed.emit(step_name, description_text, option_texts)
 
 
 # Processes the signal node data (dict).
 func _process_signal(dict : Dictionary):
-	dialogue_signal.emit(dict.signalValue)
+	quest_signal.emit(dict.signalValue)
 	_proceed(dict.link)
 
 
@@ -244,7 +244,7 @@ func _check_condition(dict : Dictionary):
 
 
 # Replaces all {{}} variables with their corresponding values in the value string.
-# If variable is not found in [member DialogueParse.variables], it is substituted with an empty string along with a console error.
+# If variable is not found in [member QuestParse.variables], it is substituted with an empty string along with a console error.
 func _parse_variables(value : String):
 	# check for missing }}
 	if value.count('{{') != value.count('}}'):

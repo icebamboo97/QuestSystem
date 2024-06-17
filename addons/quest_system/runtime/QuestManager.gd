@@ -12,7 +12,11 @@ var available: AvailableQuestPool = AvailableQuestPool.new("Available")
 var active: ActiveQuestPool = ActiveQuestPool.new("Active")
 var completed: CompletedQuestPool = CompletedQuestPool.new("Completed")
 
+var debug = false
+
 func _init() -> void:
+	debug = QuestSystemSettings.get_config_setting("debug")
+	
 	add_child(available)
 	add_child(active)
 	add_child(completed)
@@ -55,9 +59,16 @@ func complete_quest(quest: QuestData) -> QuestData:
 
 
 func mark_quest_as_available(quest: QuestData) -> void:
+	if debug:
+		print(quest.quest_name)
+	
 	if available.is_quest_inside(quest) or completed.is_quest_inside(quest) or active.is_quest_inside(quest):
+		if debug:
+			print(quest.quest_name + "available failed.")
 		return
 
+	if debug:
+		print(quest.quest_name + "is available.")
 	available.add_quest(quest)
 	new_available_quest.emit(quest)
 
@@ -67,6 +78,9 @@ func get_available_quests() -> Array[QuestData]:
 
 func get_active_quests() -> Array[QuestData]:
 	return active.quests
+
+func get_completed_quests() -> Array[QuestData]:
+	return completed.quests
 
 
 func is_quest_available(quest: QuestData) -> bool:

@@ -1,9 +1,9 @@
 @tool
-## A node for update quest status
+## A node for update quest status, copy form DialogueBox
+## TODO:Use in gameplay，Need:satrt quest, push quest, Complete quest
+
 class_name QuestUpdate
 extends Node
-
-# TODO:先处理任务管理器的任务池
 
 @export_group('Data')
 ## Contains the [param QuestData] resource created using the Quest Nodes editor.

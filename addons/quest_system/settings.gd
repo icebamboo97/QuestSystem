@@ -35,7 +35,6 @@ static func initialize(plugin_path: StringName) -> void:
 		#true, TYPE_BOOL)
 
 
-
 static func _init_setting(name: String, default_value: Variant, type:=typeof(default_value), hint:=PROPERTY_HINT_NONE, hint_string:=""):
 	if not ProjectSettings.has_setting(name):
 		ProjectSettings.set_setting(name, default_value)

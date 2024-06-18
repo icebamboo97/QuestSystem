@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://hybq2hnfha0u"]
+[gd_scene load_steps=7 format=3 uid="uid://hybq2hnfha0u"]
 
 [ext_resource type="Script" path="res://examples/demo_quest.gd" id="1_ehvm3"]
 [ext_resource type="Resource" uid="uid://cagccns5bfxpc" path="res://examples/TestQuest_1.tres" id="2_51u3s"]
 [ext_resource type="Resource" uid="uid://dxgsb16skf0v4" path="res://examples/TestQuest_2.tres" id="3_ly20p"]
 [ext_resource type="Resource" uid="uid://cdhr8almvispe" path="res://examples/TestQuest_3.tres" id="4_yhtf8"]
+[ext_resource type="Script" path="res://addons/quest_system/runtime/QuestUpdate.gd" id="5_3s2ns"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_673dw"]
 font_size = 22
@@ -151,5 +152,8 @@ grow_vertical = 2
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="QuestUpdate" type="Node" parent="."]
+script = ExtResource("5_3s2ns")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

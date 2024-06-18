@@ -1,6 +1,6 @@
 @tool
 extends GraphNode
-
+class_name QuestStepNode
 
 signal modified
 signal character_list_requested(dialogue_node : GraphNode)
@@ -16,10 +16,13 @@ signal connection_shift_request(from_node : String, old_port : int, new_port : i
 @onready var speaker = %Speaker
 @onready var custom_speaker = %CustomSpeaker
 @onready var character_toggle = %CharacterToggle
-@onready var description = %Dialogue
-@onready var dialogue_panel = %DialoguePanel
-@onready var dialogue_expanded = %DialogueExpanded
+@onready var description = %Description
+@onready var description_panel = %DescriptionPanel
+@onready var description_expanded = %DescriptionExpanded
 @onready var step_name: LineEdit = %TitleLine
+
+var step_state := StepState.Available
+var objectives : Array = []
 
 var undo_redo : EditorUndoRedoManager
 var last_size := size
@@ -33,6 +36,7 @@ var empty_option : BoxContainer
 var first_option_index := -1
 var base_color : Color = Color.WHITE
 
+enum StepState {Available, Failed, Successed}
 
 func _ready():
 	options.clear()
@@ -59,6 +63,7 @@ func _to_dict(graph : GraphEdit):
 	
 	dict['step_name'] = step_name.text
 	dict['description'] = description.text
+	dict['step_state'] = step_state
 	dict['size'] = size
 	
 	# get options connected to other nodes
@@ -106,8 +111,9 @@ func _from_dict(dict : Dictionary):
 	step_name.text = dict['step_name']
 	last_title_line = step_name.text
 	description.text = dict['description']
-	dialogue_expanded.text = description.text
+	description_expanded.text = description.text
 	last_dialogue = description.text
+	step_state = dict['step_state']
 	
 	# remove any existing options (if any)
 	for option in options:
@@ -148,6 +154,9 @@ func set_title_line(new_title_line : String):
 		step_name.text = new_title_line
 	last_title_line = step_name.text
 
+func set_step_state(state : StepState):
+	step_state = state
+
 func set_custom_speaker(new_custom_speaker : String):
 	if custom_speaker.text != new_custom_speaker:
 		custom_speaker.text = new_custom_speaker
@@ -162,8 +171,8 @@ func toggle_speaker_input(use_speaker_list : bool):
 func set_dialogue_text(new_text : String):
 	if description.text != new_text:
 		description.text = new_text
-	if dialogue_expanded.text != new_text:
-		dialogue_expanded.text = description.text
+	if description_expanded.text != new_text:
+		description_expanded.text = description.text
 	last_dialogue = description.text
 
 
@@ -311,24 +320,24 @@ func _on_dialogue_timer_timeout():
 	if not undo_redo: return
 	
 	undo_redo.create_action('Set description text')
-	if dialogue_panel.visible:
-		undo_redo.add_do_method(self, 'set_dialogue_text', dialogue_expanded.text)
+	if description_panel.visible:
+		undo_redo.add_do_method(self, 'set_dialogue_text', description_expanded.text)
 	else:
 		undo_redo.add_do_method(self, 'set_dialogue_text', description.text)
 	undo_redo.add_do_method(self, '_on_modified')
 	undo_redo.add_undo_method(self, '_on_modified')
-	undo_redo.add_undo_method(dialogue_expanded, 'release_focus')
+	undo_redo.add_undo_method(description_expanded, 'release_focus')
 	undo_redo.add_undo_method(self, 'set_dialogue_text', last_dialogue)
 	undo_redo.commit_action()
 
 
 func _on_expand_button_pressed():
-	dialogue_panel.popup_centered()
-	dialogue_expanded.grab_focus()
+	description_panel.popup_centered()
+	description_expanded.grab_focus()
 
 
 func _on_close_button_pressed():
-	dialogue_panel.hide()
+	description_panel.hide()
 
 
 func _on_option_text_changed(new_text : String, option : BoxContainer):

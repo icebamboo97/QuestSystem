@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b60fa8vcjuoo6"]
 
-[ext_resource type="Script" path="res://addons/quest_system/nodes/questStepNode.gd" id="1_g5fll"]
+[ext_resource type="Script" path="res://addons/quest_system/nodes/QuestStepNode.gd" id="1_rbh4a"]
 [ext_resource type="Texture2D" uid="uid://dla76qr5vqp1r" path="res://addons/quest_system/icons/Character.svg" id="2_i4hav"]
 [ext_resource type="Texture2D" uid="uid://dps8mwnnuc5nm" path="res://addons/quest_system/icons/DistractionFree.svg" id="3_42j5y"]
 [ext_resource type="PackedScene" uid="uid://blp6ulybtwgcj" path="res://addons/quest_system/nodes/QuestNodeOption.tscn" id="4_geita"]
@@ -83,7 +83,7 @@ slot/6/right_type = 0
 slot/6/right_color = Color(1, 1, 1, 1)
 slot/6/right_icon = null
 slot/6/draw_stylebox = true
-script = ExtResource("1_g5fll")
+script = ExtResource("1_rbh4a")
 resize_timer = NodePath("DescriptionContainer/ResizeTimer")
 custom_speaker_timer = NodePath("TalkerContainer/CustomSpeakerTimer")
 dialogue_timer = NodePath("DescriptionContainer/DialogueTimer")
@@ -139,7 +139,7 @@ text = "Description"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Dialogue" type="TextEdit" parent="DescriptionContainer"]
+[node name="Description" type="TextEdit" parent="DescriptionContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -152,12 +152,12 @@ highlight_all_occurrences = true
 layout_mode = 2
 icon = ExtResource("3_42j5y")
 
-[node name="DialoguePanel" type="PopupPanel" parent="DescriptionContainer"]
+[node name="DescriptionPanel" type="PopupPanel" parent="DescriptionContainer"]
 unique_name_in_owner = true
 initial_position = 1
 size = Vector2i(800, 600)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionContainer/DialoguePanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionContainer/DescriptionPanel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -168,7 +168,7 @@ offset_bottom = 596.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DialogueExpanded" type="TextEdit" parent="DescriptionContainer/DialoguePanel/VBoxContainer"]
+[node name="DescriptionExpanded" type="TextEdit" parent="DescriptionContainer/DescriptionPanel/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 91)
 layout_mode = 2
@@ -178,10 +178,10 @@ wrap_mode = 1
 syntax_highlighter = SubResource("CodeHighlighter_btpy8")
 highlight_all_occurrences = true
 
-[node name="CenterContainer" type="CenterContainer" parent="DescriptionContainer/DialoguePanel/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="DescriptionContainer/DescriptionPanel/VBoxContainer"]
 layout_mode = 2
 
-[node name="CloseButton" type="Button" parent="DescriptionContainer/DialoguePanel/VBoxContainer/CenterContainer"]
+[node name="CloseButton" type="Button" parent="DescriptionContainer/DescriptionPanel/VBoxContainer/CenterContainer"]
 layout_mode = 2
 text = "Close"
 
@@ -207,9 +207,9 @@ layout_mode = 2
 [connection signal="item_selected" from="TalkerContainer/Speaker" to="." method="_on_speaker_selected"]
 [connection signal="toggled" from="TalkerContainer/CharacterToggle" to="." method="_on_speaker_toggled"]
 [connection signal="timeout" from="TalkerContainer/CustomSpeakerTimer" to="." method="_on_custom_speaker_timer_timeout"]
-[connection signal="text_changed" from="DescriptionContainer/Dialogue" to="." method="_on_dialogue_text_changed"]
+[connection signal="text_changed" from="DescriptionContainer/Description" to="." method="_on_dialogue_text_changed"]
 [connection signal="pressed" from="DescriptionContainer/ExpandButton" to="." method="_on_expand_button_pressed"]
-[connection signal="text_changed" from="DescriptionContainer/DialoguePanel/VBoxContainer/DialogueExpanded" to="." method="_on_dialogue_text_changed"]
-[connection signal="pressed" from="DescriptionContainer/DialoguePanel/VBoxContainer/CenterContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="text_changed" from="DescriptionContainer/DescriptionPanel/VBoxContainer/DescriptionExpanded" to="." method="_on_dialogue_text_changed"]
+[connection signal="pressed" from="DescriptionContainer/DescriptionPanel/VBoxContainer/CenterContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="timeout" from="DescriptionContainer/ResizeTimer" to="." method="_on_resize_timer_timeout"]
 [connection signal="timeout" from="DescriptionContainer/DialogueTimer" to="." method="_on_dialogue_timer_timeout"]

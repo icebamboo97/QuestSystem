@@ -1,8 +1,6 @@
 @tool
 extends HBoxContainer
 
-#原本是生成对话选项以及后续内容，任务系统扩展一个作为推进任务的条件判断
-
 signal modified
 signal text_changed(new_text : String)
 

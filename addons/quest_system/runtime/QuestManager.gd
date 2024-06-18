@@ -3,6 +3,7 @@ extends Node
 signal quest_accepted(quest: QuestData) # Emitted when a quest gets moved to the ActivePool
 signal quest_completed(quest: QuestData) # Emitted when a quest gets moved to the CompletedPool
 signal new_available_quest(quest: QuestData) # Emitted when a quest gets added to the AvailablePool
+signal quest_updated(quest: QuestData) # Emitted when a quest gets added to the AvailablePool
 
 const AvailableQuestPool = preload("./AvailableQuestPool.gd")
 const ActiveQuestPool = preload("./ActiveQuestPool.gd")
@@ -40,6 +41,18 @@ func start_quest(quest: QuestData) -> QuestData:
 
 	return quest
 
+func set_quest_step_state(quest: QuestData, state : QuestStepNode.StepState) -> QuestData:
+	assert(quest != null)
+
+	if not active.is_quest_inside(quest):
+		return quest
+
+	#把当前节点设置完成
+
+	quest_updated.emit(quest)
+	quest.update()
+
+	return quest
 
 func complete_quest(quest: QuestData) -> QuestData:
 	if not active.is_quest_inside(quest):

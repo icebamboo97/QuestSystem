@@ -8,7 +8,9 @@ var QUEST_ITEM_PANEL = preload("res://examples/quest_item_panel.tscn")
 @onready var active_quest_pool: VBoxContainer = $HSplitContainer/Panel/VBoxContainer2/ScrollContainer3/ActiveQuestPool
 @onready var completed_quest_pool: VBoxContainer = $HSplitContainer/Panel/VBoxContainer2/ScrollContainer2/CompletedQuestPool
 
-@onready var rich_text_label: RichTextLabel = $HSplitContainer/Panel2/RichTextLabel
+@onready var quest_operation = %QuestOperation
+
+@onready var rich_text_label = %RichTextLabel
 
 var available_quests : Array[QuestData]
 var active_quests : Array[QuestData]
@@ -17,6 +19,8 @@ var complete_quests : Array[QuestData]
 var _quest_parser : QuestParser
 
 var item_dic : Dictionary
+
+var cur_selected_quest_data
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_quest_parser = QuestParser.new()
@@ -29,6 +33,7 @@ func _ready() -> void:
 	QuestManager.quest_accepted.connect(update_item_quest_accepted)
 	QuestManager.quest_completed.connect(update_item_quest_completed)
 	init_ui()
+	quest_operation.hide()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -84,6 +89,9 @@ func select_quest_item(quest_data : QuestData):
 	
 	rich_text_label.add_text(quest_data.quest_name)
 	rich_text_label.add_text(quest_data.quest_description)
+	
+	cur_selected_quest_data = quest_data
+	quest_operation.show()
 
 func _on_step_processed(speaker : Variant, dialogue : String, options : Array[String]):
 	# set step name
@@ -110,3 +118,9 @@ func _on_timer_timeout():
 		#QuestManager.start_quest(available_quests[0])
 	#if active_quests.size() > 1:
 		#QuestManager.complete_quest(active_quests[1])
+
+func _on_start_button_pressed():
+	QuestManager.start_quest(cur_selected_quest_data)
+
+func _on_update_button_pressed():
+	pass # Replace with function body.

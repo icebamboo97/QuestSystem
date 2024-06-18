@@ -1,3 +1,4 @@
+## --------------------------废弃了！！！-------------------------
 @tool
 ## A node for displaying branching dialogues, primarily created using the Dialogue Nodes editor.[br]
 ## NOTE: This node is not good at handling long paragraphs of text. It is recommended to use [DialogueBox] instead, or create your custom implementation using [QuestParser].

@@ -82,6 +82,12 @@ func get_active_quests() -> Array[QuestData]:
 func get_completed_quests() -> Array[QuestData]:
 	return completed.quests
 
+func get_all_pools() -> Array[BaseQuestPool]:
+	var all_pools : Array[BaseQuestPool]
+	all_pools.append(available)
+	all_pools.append(active)
+	all_pools.append(completed)
+	return all_pools
 
 func is_quest_available(quest: QuestData) -> bool:
 	if not (active.is_quest_inside(quest) or completed.is_quest_inside(quest)):

@@ -31,7 +31,7 @@ nodes = {
 },
 "size": Vector2(300, 311),
 "speaker": "",
-"step_name": "22"
+"step_name": "step22"
 },
 "1_2": {
 "description": "34533434",
@@ -45,7 +45,7 @@ nodes = {
 },
 "size": Vector2(300, 311),
 "speaker": "",
-"step_name": "67"
+"step_name": "step67"
 }
 }
 variables = {}

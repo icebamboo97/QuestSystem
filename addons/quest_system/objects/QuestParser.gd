@@ -61,7 +61,7 @@ func load_data(path : String):
 
 
 ## Starts processing the quest data set in [member data], starting with the Start Node with its ID set to [param start_id].
-func start(start_id : String):
+func start(start_id : String = ""):
 	if not data:
 		printerr('No quest data loaded!')
 		return

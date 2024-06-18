@@ -1,3 +1,4 @@
+## --------------------------废弃了！！！-------------------------
 @tool
 ## A node for displaying branching dialogues, primarily created using the Dialogue Nodes editor.
 class_name DialogueBox
@@ -21,7 +22,6 @@ signal variable_changed(variable_name : String, value)
 ## Triggered when a dialogue tree has ended processing and reached the end of the dialogue.
 ## The [DialogueBox] may hide based on the [member hide_on_dialogue_end] property.
 signal dialogue_ended
-
 
 @export_group('Data')
 ## Contains the [param QuestData] resource created using the Dialogue Nodes editor.

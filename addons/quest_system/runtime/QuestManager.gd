@@ -3,7 +3,7 @@ extends Node
 signal quest_accepted(quest: QuestData) # Emitted when a quest gets moved to the ActivePool
 signal quest_completed(quest: QuestData) # Emitted when a quest gets moved to the CompletedPool
 signal new_available_quest(quest: QuestData) # Emitted when a quest gets added to the AvailablePool
-signal quest_updated(quest: QuestData) # Emitted when a quest gets added to the AvailablePool
+signal quest_updated(quest: QuestData, step_id : Variant) # Emitted when a quest gets added to the AvailablePool
 
 const AvailableQuestPool = preload("./AvailableQuestPool.gd")
 const ActiveQuestPool = preload("./ActiveQuestPool.gd")
@@ -61,20 +61,25 @@ func set_quest_step_state(quest: QuestData, state : QuestStepNode.StepState):
 	_quest_parser.start()
 
 	# TODO:应该调整，但是问题不大
-	quest_updated.emit(quest)
+	quest_updated.emit(quest, quest.curr_step_id)
 	quest.update()
 
 func step_processed_runtime(step_name : Variant, step_state : QuestStepNode.StepState, step_id : Variant):
 	if step_state == QuestStepNode.StepState.Available:
 		curr_quest.curr_step_id = step_id
+		curr_quest.nodes[step_id]['step_state'] = QuestStepNode.StepState.Successed
 		_quest_parser.stop()
 		_quest_parser.step_processed_runtime.disconnect(step_processed_runtime)
 
-
+		if curr_quest.nodes[step_id]['options'][0]['link'] == 'END':
+			complete_quest(curr_quest)
+	else :
+		_quest_parser.select_option(0)
+	
 func complete_quest(quest: QuestData) -> QuestData:
 	if not active.is_quest_inside(quest):
 		return quest
-
+	print(quest.quest_name, "is done!")
 	#if quest.objective_completed == false and QuestSystemSettings.get_config_setting("require_objective_completed"):
 		#return quest
 

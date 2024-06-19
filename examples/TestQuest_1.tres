@@ -20,27 +20,22 @@ nodes = {
 "start_id": "START"
 },
 "1_1": {
-"description": "222222222",
-"offset": Vector2(740, 440),
+"description": "第一步的描述",
+"offset": Vector2(780, 440),
 "options": {
 0: {
 "condition": {},
 "link": &"1_2",
-"text": "3"
-},
-1: {
-"condition": {},
-"link": &"1_3",
-"text": "4"
+"text": ""
 }
 },
-"size": Vector2(300, 407),
+"size": Vector2(300, 240),
 "speaker": "",
-"step_name": "22",
+"step_name": "第一步",
 "step_state": 0
 },
 "1_2": {
-"description": "3333333",
+"description": "第二步的描述",
 "offset": Vector2(1360, 460),
 "options": {
 0: {
@@ -51,30 +46,15 @@ nodes = {
 },
 "size": Vector2(300, 311),
 "speaker": "",
-"step_name": "33",
-"step_state": 0
-},
-"1_3": {
-"description": "44444444",
-"offset": Vector2(1360, 840),
-"options": {
-0: {
-"condition": {},
-"link": "END",
-"text": ""
-}
-},
-"size": Vector2(300, 311),
-"speaker": "",
-"step_name": "444",
+"step_name": "第二步",
 "step_state": 0
 }
 }
 variables = {}
 strays = Array[String]([])
 characters = ""
-quest_name = "test1111"
-quest_description = "11111111111111"
+quest_name = "测试任务1"
+quest_description = "这是任务1的描述"
 quest_type = SubResource("Resource_td011")
 id = 0
 curr_step_id = "0_1"

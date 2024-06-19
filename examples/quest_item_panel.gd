@@ -11,9 +11,6 @@ var quest_data : QuestData
 func _ready() -> void:
 	print(name)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func set_quest_name(quest_name : String):
 	title_label = $TitlePanel/TitleLabel

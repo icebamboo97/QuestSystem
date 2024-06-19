@@ -31,7 +31,8 @@ nodes = {
 },
 "size": Vector2(300, 311),
 "speaker": "",
-"step_name": "step22"
+"step_name": "step22",
+"step_state": 0
 },
 "1_2": {
 "description": "34533434",
@@ -45,7 +46,8 @@ nodes = {
 },
 "size": Vector2(300, 311),
 "speaker": "",
-"step_name": "step67"
+"step_name": "step67",
+"step_state": 0
 }
 }
 variables = {}
@@ -55,3 +57,4 @@ quest_name = "test222"
 quest_description = "222"
 quest_type = SubResource("Resource_smw5e")
 id = 0
+curr_step_id = "0_1"

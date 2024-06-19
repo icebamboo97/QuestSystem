@@ -113,7 +113,7 @@ func _from_dict(dict : Dictionary):
 	description.text = dict['description']
 	description_expanded.text = description.text
 	last_dialogue = description.text
-	step_state = dict['step_state']
+	#step_state = dict['step_state']
 	
 	# remove any existing options (if any)
 	for option in options:

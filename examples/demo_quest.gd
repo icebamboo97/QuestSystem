@@ -34,10 +34,6 @@ func _ready() -> void:
 	QuestManager.quest_completed.connect(update_item_quest_completed)
 	init_ui()
 	quest_operation.hide()
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func init_ui():
 	available_quests = QuestManager.get_available_quests()
@@ -79,11 +75,12 @@ func create_quest_item(quest_data) -> Node:
 	return quest_item
 	
 func select_quest_item(quest_data : QuestData):
+	#TODO: 把任务更新到curr step
 	rich_text_label.clear()
 	_quest_parser.data = quest_data
 
-	_quest_parser.quest_processed.connect(_on_step_processed)
-	_quest_parser.quest_ended.connect(_on_quest_ended)
+	_quest_parser.step_processed.connect(_on_step_processed)
+	_quest_parser.parse_ended.connect(_on_parse_ended)
 	
 	_quest_parser.start()
 	
@@ -103,13 +100,10 @@ func _on_step_processed(speaker : Variant, dialogue : String, options : Array[St
 	rich_text_label.add_text('\n')
 	rich_text_label.add_text(dialogue)
 	
-	# set options
-	if not _quest_parser: return
-	_quest_parser.select_option(0)
 
-func _on_quest_ended():
-	_quest_parser.quest_processed.disconnect(_on_step_processed)
-	_quest_parser.quest_ended.disconnect(_on_quest_ended)
+func _on_parse_ended():
+	_quest_parser.step_processed.disconnect(_on_step_processed)
+	_quest_parser.parse_ended.disconnect(_on_parse_ended)
 
 ## Test
 func _on_timer_timeout():
@@ -123,4 +117,8 @@ func _on_start_button_pressed():
 	QuestManager.start_quest(cur_selected_quest_data)
 
 func _on_update_button_pressed():
-	pass # Replace with function body.
+	#if not _quest_parser: return
+	#_quest_parser.select_option(0)
+	QuestManager.set_quest_step_state(cur_selected_quest_data, QuestStepNode.StepState.Successed)
+	
+	select_quest_item(cur_selected_quest_data)

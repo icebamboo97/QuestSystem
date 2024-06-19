@@ -25,7 +25,7 @@ extends Resource
 ## Quest id
 @export var id : int
 ## Current Step, use node name
-@export var curr_step : String = ''
+@export var curr_step_id : String = '0_1'
 
 signal started
 signal updated

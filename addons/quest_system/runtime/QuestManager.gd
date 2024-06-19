@@ -15,12 +15,19 @@ var completed: CompletedQuestPool = CompletedQuestPool.new("Completed")
 
 var debug = false
 
+var _quest_parser : QuestParser
+
+var curr_quest : QuestData
+
 func _init() -> void:
 	debug = QuestSystemSettings.get_config_setting("debug")
 	
 	add_child(available)
 	add_child(active)
 	add_child(completed)
+	
+	_quest_parser = QuestParser.new()
+	add_child(_quest_parser)
 
 # Quest API
 
@@ -41,18 +48,28 @@ func start_quest(quest: QuestData) -> QuestData:
 
 	return quest
 
-func set_quest_step_state(quest: QuestData, state : QuestStepNode.StepState) -> QuestData:
+func set_quest_step_state(quest: QuestData, state : QuestStepNode.StepState):
 	assert(quest != null)
 
 	if not active.is_quest_inside(quest):
 		return quest
 
 	#把当前节点设置完成
+	curr_quest = quest
+	_quest_parser.data = quest
+	_quest_parser.step_processed_runtime.connect(step_processed_runtime)
+	_quest_parser.start()
 
+	# TODO:应该调整，但是问题不大
 	quest_updated.emit(quest)
 	quest.update()
 
-	return quest
+func step_processed_runtime(step_name : Variant, step_state : QuestStepNode.StepState, step_id : Variant):
+	if step_state == QuestStepNode.StepState.Available:
+		curr_quest.curr_step_id = step_id
+		_quest_parser.stop()
+		_quest_parser.step_processed_runtime.disconnect(step_processed_runtime)
+
 
 func complete_quest(quest: QuestData) -> QuestData:
 	if not active.is_quest_inside(quest):

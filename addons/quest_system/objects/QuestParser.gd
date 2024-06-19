@@ -6,11 +6,11 @@ extends Node
 # TODO : Fix [wait] bbcode
 
 ## Triggered when a quest has started. Passes [param id] of the quest tree as defined in the StartNode.
-signal quest_started(id : String)
+signal parse_started(id : String)
 ## Triggered when a single quest block has been processed.
 ## Passes [param step_name] which can be a [String], a [param description] containing the text to be displayed
 ## and an [param options] list containing the texts for each option.
-signal quest_processed(step_name : Variant, description : String, options : Array[String])
+signal step_processed(step_name : Variant, description : String, options : Array[String])
 ## Triggered when an option is selected
 signal option_selected(idx : int)
 ## Triggered when a SignalNode is encountered while processing the quest.
@@ -20,7 +20,9 @@ signal quest_signal(value : String)
 ## Passes the [param variable_name] along with it's [param value]
 signal variable_changed(variable_name : String, value)
 ## Triggered when a quest tree has ended processing and reached the end of the quest.
-signal quest_ended
+signal parse_ended
+## Runtime QuestManager
+signal step_processed_runtime(step_name : Variant, step_state : QuestStepNode.StepState ,step_id : Variant)
 
 ## Contains the [param QuestData] resource created using the Quest Nodes editor. Use [method load_data] to set its value.
 @export var data : QuestData :
@@ -70,14 +72,14 @@ func start(start_id : String = ""):
 	# 	return
 	
 	_running = true
-	quest_started.emit(start_id)
+	parse_started.emit(start_id)
 	_proceed(data.starts.values()[0])
 
 
 ## Stops processing the quest tree.
 func stop():
 	_running = false
-	quest_ended.emit()
+	parse_ended.emit()
 
 
 ## Continues processing the quest tree from the node connected to the option at [param idx].
@@ -139,7 +141,9 @@ func _process_step(dict : Dictionary):
 			option_texts.append(_parse_variables(option.text))
 			_option_links.append(option.link)
 	
-	quest_processed.emit(step_name, description_text, option_texts)
+	step_processed.emit(step_name, description_text, option_texts)
+	
+	step_processed_runtime.emit(step_name, dict.step_state, data.nodes.find_key(dict))
 
 
 # Processes the signal node data (dict).

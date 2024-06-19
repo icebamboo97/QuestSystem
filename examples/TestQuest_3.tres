@@ -31,7 +31,8 @@ nodes = {
 },
 "size": Vector2(300, 311),
 "speaker": "",
-"step_name": "22"
+"step_name": "22",
+"step_state": 0
 }
 }
 variables = {}
@@ -41,3 +42,4 @@ quest_name = "test333"
 quest_description = "3333333"
 quest_type = SubResource("Resource_td011")
 id = 0
+curr_step_id = "0_1"
